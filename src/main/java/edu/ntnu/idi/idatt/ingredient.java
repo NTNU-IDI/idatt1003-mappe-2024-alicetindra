@@ -45,7 +45,7 @@ public class ingredient {
 
   @Override
   public String toString() {
-    return " grocery{ " + name + ", " + amount + " " + measureUnit + ", Best before: "
-        + expirationDate + ", " + price + " kr.";
+    return " grocery{ " + name + ", " + amount + " " + measureUnit + ", Expiration date: "
+        + expirationDate + ", " + price + " kr.}";
   }
 }
