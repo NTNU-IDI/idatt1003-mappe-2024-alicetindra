@@ -12,6 +12,21 @@ public class ingredient {
 
   public ingredient(String name, double amount, String measureUnit, LocalDate expirationDate,
       double price) {
+    if (name == null || name.trim().isEmpty()) {
+      throw new IllegalArgumentException("Name is null or empty");
+    }
+    if (amount <= 0) {
+      throw new IllegalArgumentException("Amount must be greater than 0");
+    }
+    if (measureUnit == null || measureUnit.trim().isEmpty()) {
+      throw new IllegalArgumentException("MeasureUnit is null or empty");
+    }
+    if (expirationDate == null || expirationDate.isBefore(LocalDate.now())) {
+      throw new IllegalArgumentException("Expiration Date is null or in the past");
+    }
+    if (price < 0) {
+      throw new IllegalArgumentException("Price cannot be negative");
+    }
     this.name = name;
     this.amount = amount;
     this.measureUnit = measureUnit;
@@ -28,6 +43,9 @@ public class ingredient {
   }
 
   public void setAmount(double amount) {// change amount of the ingredient
+    if (amount <= 0) { //make sure the amount is greater than 0
+      throw new IllegalArgumentException("Amount must be greater than 0");
+    }
     this.amount = amount;
   }
 

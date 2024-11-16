@@ -51,9 +51,15 @@ public class Main {
             int day = numbers.nextInt();
             System.out.println("Enter price of grocery: ");
             double price = numbers.nextDouble();
-            ingredient ingredient = new ingredient(name, amount, measurementUnit,
-                LocalDate.of(year, month, day), price);
-            System.out.println(ingredient);
+            try {
+              //attempt to create an ingredient with user input
+              ingredient ingredient = new ingredient(name, amount, measurementUnit,
+                  LocalDate.of(year, month, day), price);
+              System.out.println(ingredient);
+            } catch (IllegalArgumentException e) {
+              //handle invalid input (e.g, negative number or invalid date
+              System.out.println("Invalid input: " + e.getMessage());
+            }
             break;
           case 2:
             System.out.println("Store ingredient in food storage: ");
