@@ -27,9 +27,9 @@ public class ingredient {
     if (price < 0) {
       throw new IllegalArgumentException("Price cannot be negative");
     }
-    this.name = name;
+    this.name = name.toLowerCase();
     this.amount = amount;
-    this.measureUnit = measureUnit;
+    this.measureUnit = measureUnit.toLowerCase();
     this.expirationDate = expirationDate;
     this.price = price;
   }
@@ -64,6 +64,6 @@ public class ingredient {
   @Override
   public String toString() {
     return " grocery{ " + name + ", " + amount + " " + measureUnit + ", Expiration date: "
-        + expirationDate + ", " + price + " kr.}";
+        + expirationDate + ", " + price + " kr.}\n";
   }
 }
