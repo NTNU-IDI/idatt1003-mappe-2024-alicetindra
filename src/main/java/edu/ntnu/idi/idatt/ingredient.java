@@ -43,10 +43,10 @@ public class ingredient {
   }
 
   public void setAmount(double amount) {// change amount of the ingredient
-    if (amount <= 0) { //make sure the amount is greater than 0
-      throw new IllegalArgumentException("Amount must be greater than 0");
+    if (amount < 0) { //make sure the amount is greater than 0
+      throw new IllegalArgumentException("Amount can be negative");
     }
-    this.amount += amount;
+    this.amount = amount;
   }
 
   public String getMeasureUnit() {
