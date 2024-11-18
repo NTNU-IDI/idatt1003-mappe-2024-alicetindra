@@ -47,30 +47,7 @@ public class UI {
         }
         switch (choice) {
           case 1:
-            System.out.println("Enter grocery name: ");
-            String name = lines.nextLine();
-            System.out.println("Enter grocery amount: ");
-            double amount = numbers.nextDouble();
-            System.out.println("Enter measurement unit: ");
-            String measureUnit = lines.nextLine();
-            System.out.println("Enter year of best before date: ");
-            int year = numbers.nextInt();
-            System.out.println("Enter month of best before date: ");
-            int month = numbers.nextInt();
-            System.out.println("Enter day of best before date: ");
-            int day = numbers.nextInt();
-            System.out.println("Enter price of grocery: ");
-            double price = numbers.nextDouble();
-            try {
-              //attempt to create an ingredient with user input
-              ingredient ingredient = new ingredient(name, amount, measureUnit,
-                  LocalDate.of(year, month, day), price);
-              System.out.println(ingredient);
-              foodStorage.registerIngredient(ingredient);
-            } catch (IllegalArgumentException e) {
-              //handle invalid input (e.g, negative number, invalid date or letters instead of numbers)
-              System.out.println("Invalid input: " + e.getMessage());
-            }
+            menu();
             break;
           case 2:
             System.out.println("Store ingredient in food storage: ");
@@ -112,7 +89,35 @@ public class UI {
         numbers.nextLine(); //skip user input
       }
     }
-
-
   }
+
+  //Method for each switch case to clean up code
+  public void menu() {
+    System.out.println("Enter grocery name: ");
+    String name = lines.nextLine();
+    System.out.println("Enter grocery amount: ");
+    double amount = numbers.nextDouble();
+    System.out.println("Enter measurement unit: ");
+    String measureUnit = lines.nextLine();
+    System.out.println("Enter year of best before date: ");
+    int year = numbers.nextInt();
+    System.out.println("Enter month of best before date: ");
+    int month = numbers.nextInt();
+    System.out.println("Enter day of best before date: ");
+    int day = numbers.nextInt();
+    System.out.println("Enter price of grocery: ");
+    double price = numbers.nextDouble();
+    try {
+      //attempt to create an ingredient with user input
+      ingredient ingredient = new ingredient(name, amount, measureUnit,
+          LocalDate.of(year, month, day), price);
+      System.out.println(ingredient);
+      foodStorage.registerIngredient(ingredient);
+    } catch (IllegalArgumentException e) {
+      //handle invalid input (e.g, negative number, invalid date or letters instead of numbers)
+      System.out.println("Invalid input: " + e.getMessage());
+    }
+  }
+
+
 }
