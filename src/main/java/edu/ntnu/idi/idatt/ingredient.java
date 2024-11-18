@@ -46,7 +46,7 @@ public class ingredient {
     if (amount <= 0) { //make sure the amount is greater than 0
       throw new IllegalArgumentException("Amount must be greater than 0");
     }
-    this.amount = amount;
+    this.amount += amount;
   }
 
   public String getMeasureUnit() {
