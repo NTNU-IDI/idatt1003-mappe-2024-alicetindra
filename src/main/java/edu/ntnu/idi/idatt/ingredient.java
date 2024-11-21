@@ -44,7 +44,7 @@ public class ingredient {
 
   public void setAmount(double amount) {// change amount of the ingredient
     if (amount < 0) { //make sure the amount is greater than 0
-      throw new IllegalArgumentException("Amount can be negative");
+      throw new IllegalArgumentException("Amount cannot be negative");
     }
     this.amount = amount;
   }

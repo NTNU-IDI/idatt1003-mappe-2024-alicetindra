@@ -10,7 +10,9 @@ public class foodStorage {
   private final List<ingredient> foodStorage;
 
   /**
-   * Method: This is the constructor Creating an arraylist called foodStorage
+   * Method: Constructor
+   * <p></p>The constructor
+   * Creating an arraylist called foodStorage
    */
   public foodStorage() {
     foodStorage = new ArrayList<>();
@@ -18,11 +20,10 @@ public class foodStorage {
 
   /**
    * Method: Register ingredient in arraylist foodStorage.
-   * <p>This method will go through the arraylist foodStorage and see if the new ingredient
-   * already exists. If it exists and has the same expiration date the amount will increase. If the
-   * ingredient exist bus has a different expiration date a new element in the array will be created
-   * with the same name. If the name does not exist a new ingredient will be added to the
-   * arraylist.
+   * <p>Using for loop to go through all existing ingredients. If no ingredient with same name or
+   * expiration date. The new ingredient is added as a new element.
+   *
+   * @param ing The method takes in an ingredient that is created.
    */
   public void registerIngredient(ingredient ing) {
 
@@ -36,12 +37,13 @@ public class foodStorage {
     foodStorage.add(ing);
   }
 
-
   /**
-   * Method: Search for ingredient in foodStorage. The method returns an arraylist. An arraylist
-   * called search is created and the for loop goes through the arraylist foodStorage and if the
-   * name corresponds with the input name the ingredient is added to the new arraylist search. This
-   * list is then returned.
+   * Method: Get ingredient by name.
+   * <p>Search for ingredient in foodStorage by name, and the ingredients is added to a new
+   * arraylist called "search".
+   *
+   * @param name Method takes in string parameter. Searching for a name of an ingredient.
+   * @return Returning the new composed list of all ingredients with the same name.
    */
   public List<ingredient> getIngredient(String name) {
     if (name == null || name.trim().isEmpty()) {
@@ -57,16 +59,20 @@ public class foodStorage {
   }
 
   /**
-   * Method: Remove amount of a certain ingredient. Create list of ingredients with same name called
-   * copies. Get the total amount of that ingredient. If totalAmount is less than amount it cannot
-   * be used. Throw exception. Arraylist copies is sorted by date with comparator. While loop where
-   * the loop continues as long as the amount is greater than 0. For loop goes through the
-   * ingredients in copies list. If the amount of the first ingredient is more than input amount a
-   * new amount is set for the ingredient and amount is set to 0. If the amount of the ingredient is
+   * Method: Remove certain amount of ingredient
+   * <p>Creates new array list called copies. If there are ingredients with same name these are put
+   * in this list If total amount of the named ingredient is less than the user wants to remove an
+   * exception is thrown. The created list copies is sorted by expiration date. The one with
+   * earliest date goes through while loop first. While amount you want to remove is greater than 0
+   * thw while loop continues. If the amount of the first ingredient is more than input amount a new
+   * amount is set for the ingredient and amount is set to 0. If the amount of the ingredient is
    * equal to input amount the ingredient is removed from the foodStorage list and input amount is
    * set to 0. Lastly it the amount of the ingredient is less than the input amount, the new input
-   * amount is amount minus ingredient amount. And the ingredient will be removed from foodStorage.
-   * The while loop continues until input amount is 0.
+   * amount is amount minus ingredient amount. And the ingredient will be removed from
+   * foodStorage.</p>
+   *
+   * @param name   The name of the ingredient the user want to use
+   * @param amount The amount that user want to remove
    */
   public void removeIngredient(String name, double amount) {
     List<ingredient> copies = new ArrayList<>();
@@ -98,19 +104,29 @@ public class foodStorage {
   }
 
   /**
-   * Method: Sort list of ingredients in foodStorage. Sort foodStorage list with comparator by name
-   * and return sorted list.
+   * Method: Sort list of ingredients in foodStorage.
+   * <p>Sort foodStorage list with comparator by name</p>
+   *
+   * @return Returning the arraylist foodStorage in alphabetical order.
    */
   public List<ingredient> sortedList() {
     foodStorage.sort(Comparator.comparing(ingredient::getName));
     return foodStorage;
   }
 
-
   /**
    * Method: Return list of ingredients that has expired Create a new arraylist "stillGood". For
    * loop goes through the ingredients and adds the ones that has an expiration date that is before
    * the given date to the expired list. I sort the list in date order and return the list.
+   */
+
+  /**
+   * Method: Get expired products Create a new array list willExpire that in a for loop goes through
+   * the list foodStorage. If the ingredients has an expiration date before input date the they are
+   * added to the new list.
+   *
+   * @param date User input a date they want to compare the ingredient's expiration date.
+   * @return Returning list of ingredients that will have expired before the input date.
    */
   public List<ingredient> expireBefore(LocalDate date) {
     List<ingredient> willExpire = new ArrayList<>();
@@ -124,10 +140,11 @@ public class foodStorage {
   }
 
   /**
-   * Method: Get total price for non expired items.
+   * Method: Get total price for non expired items. Go through foodStorage list and if expiration
+   * date is before user input the price of the ingredient is added to double totalPrice
    *
    * @param date input for chosen date
-   * @return total price for all non expired ingredients.
+   * @return Returning total price for all non expired ingredients.
    */
   public double totalPriceExpiration(LocalDate date) {
     double totalPrice = 0;
@@ -141,6 +158,8 @@ public class foodStorage {
 
   /**
    * Method: Calculate total price
+   *
+   * @return Return total price with max two decimals
    */
   public double totalPrice() {
     double totalPrice = 0;

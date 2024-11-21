@@ -22,9 +22,6 @@ public class UI {
     lines = new Scanner(System.in);
     integer = new Scanner(System.in);
     doubles = new Scanner(System.in);
-    /**
-     * Adding default ingredients while starting program.
-     */
     defaultIngredients();
   }
 
@@ -48,14 +45,16 @@ public class UI {
             """);
         int choice = integer.nextInt();
 
-        //if user chooses 11. While loop is finished and program ends.
+        /**
+         *  if user chooses 11. While loop is finished and program ends.
+         */
         if (choice == 11) {
           System.out.println("Exiting program");
           break;
         }
         switch (choice) {
           case 1:
-            menu();
+            registerIngredient();
             break;
           case 2:
             searchIngredient();
@@ -109,7 +108,13 @@ public class UI {
         new ingredient("honey", 250, "grams",
             LocalDate.of(2030, 1, 20), 89.90),
         new ingredient("peanut butter", 400, "grams",
-            LocalDate.of(2025, 8, 12), 65.6));
+            LocalDate.of(2025, 8, 12), 65.6),
+        new ingredient("egg", 12, "pc",
+            LocalDate.of(2025, 2, 24), 46.0),
+        new ingredient("flour", 1000, "grams",
+            LocalDate.of(2025, 3, 18), 38.9),
+        new ingredient("ground beef", 800, "grams",
+            LocalDate.of(2025, 1, 10), 70.0));
 
     for (ingredient i : defaultIngredients) {
       foodStorage.registerIngredient(i);
@@ -119,7 +124,7 @@ public class UI {
   }
 
   //Method for each switch case to clean up code
-  public void menu() {
+  public void registerIngredient() {
     System.out.println("Enter grocery name: ");
     String name = lines.nextLine();
     System.out.println("Enter grocery amount: ");
@@ -199,6 +204,17 @@ public class UI {
    */
   public void totalPrice() {
     System.out.println("Total price of ingredients: " + foodStorage.totalPrice() + " kr.");
+  }
+
+  public void registerRecipe() {
+    System.out.println("Enter recipe name:");
+    String name = lines.nextLine();
+    System.out.println("Enter recipe description:");
+    String description = lines.nextLine();
+    System.out.println("Enter recipe instructions:");
+    String instructions = lines.nextLine();
+    // create recipeIngredient class to make a list, use while loop to add ingredients to list, 1 add 2 stop
+
   }
 
 }
