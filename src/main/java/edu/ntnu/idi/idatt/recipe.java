@@ -8,10 +8,10 @@ public class recipe {
   private final String name;
   private final String description;
   private final String howTo;
-  private final List<ingredient> ingredients;
+  private final List<recipeIngredient> ingredients;
   private final int portions;
 
-  public recipe(String name, String description, String howTo, List<ingredient> ingredients,
+  public recipe(String name, String description, String howTo, List<recipeIngredient> ingredients,
       int portions) {
     if (name == null || name.trim().isEmpty()) {
       throw new IllegalArgumentException("Name cannot be null or empty");
@@ -47,8 +47,12 @@ public class recipe {
     return howTo;
   }
 
-  public List<ingredient> getIngredients() {
+  public List<recipeIngredient> getIngredients() {
     return ingredients;
+  }
+
+  public void addIngredient(recipeIngredient ingredient) {
+    ingredients.add(ingredient);
   }
 
   public int getPortions() {
@@ -57,9 +61,8 @@ public class recipe {
 
   @Override
   public String toString() {
-    return "Recipe [name=" + name + "\nDescription=" + description + "\nInstructions=" + howTo
-        + "\nIngredients=" +
-        ingredients + "\nPortions=" + portions + "]";
+    return "Recipe for " + name + " - " + portions + " portions" + "\nDescription: " +
+        description + "\nInstructions:" + howTo + "\nIngredients:" + ingredients;
   }
 
 }
