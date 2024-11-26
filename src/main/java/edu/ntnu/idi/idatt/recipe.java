@@ -39,24 +39,8 @@ public class recipe {
     return name;
   }
 
-  public String getDescription() {
-    return description;
-  }
-
-  public String getHowTo() {
-    return howTo;
-  }
-
   public List<recipeIngredient> getIngredients() {
     return ingredients;
-  }
-
-  public void addIngredient(recipeIngredient ingredient) {
-    ingredients.add(ingredient);
-  }
-
-  public int getPortions() {
-    return portions;
   }
 
   @Override

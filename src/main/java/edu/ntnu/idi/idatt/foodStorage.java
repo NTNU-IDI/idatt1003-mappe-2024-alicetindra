@@ -122,8 +122,8 @@ public class foodStorage {
 
   /**
    * Method: Get expired products Create a new array list willExpire that in a for loop goes through
-   * the list foodStorage. If the ingredients has an expiration date before input date the they are
-   * added to the new list.
+   * the list foodStorage. If the ingredients have an expiration date before input date then they
+   * are added to the new list.
    *
    * @param date User input a date they want to compare the ingredient's expiration date.
    * @return Returning list of ingredients that will have expired before the input date.
@@ -167,6 +167,33 @@ public class foodStorage {
       totalPrice += i.getPrice();
     }
     return Math.round(totalPrice * 100.0) / 100.0;
+  }
+
+  /**
+   * @param recipe
+   */
+  public void checkRecipe(recipe recipe) {
+    List<recipeIngredient> missingIngredients = new ArrayList<>();
+    for (recipeIngredient ing : recipe.getIngredients()) {
+      double totalAmount = 0;
+      for (ingredient i : foodStorage) {
+        if (i.getName().equalsIgnoreCase(ing.name())) {
+          totalAmount += i.getAmount();
+        }
+      }
+      if (totalAmount < ing.amount()) {
+        double missingAmount = ing.amount() - totalAmount;
+        missingIngredients.add(new recipeIngredient(ing.name(), missingAmount, ing.unit()));
+      }
+    }
+    if (missingIngredients.isEmpty()) {
+      System.out.println("You have all the ingredients for " + recipe.getName());
+    } else {
+      System.out.println("You are missing the following ingredients for " + recipe.getName() + ":");
+      for (recipeIngredient miss : missingIngredients) {
+        System.out.println("-" + miss.amount() + " " + miss.unit() + " of " + miss.name());
+      }
+    }
   }
 
 

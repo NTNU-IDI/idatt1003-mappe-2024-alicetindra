@@ -9,7 +9,6 @@ public class UI {
 
   public foodStorage foodStorage;
   public recipe recipe;
-  public recipeIngredient recipeIngredient;
   public cookBook cookBook;
 
   private Scanner lines;
@@ -73,8 +72,7 @@ public class UI {
             registerRecipe();
             break;
           case 8:
-            System.out.println(
-                "Search food storage to check if you have enough ingredients for a recipe");
+            checkRecipe();
             break;
           case 9:
             printRecipe();
@@ -99,12 +97,18 @@ public class UI {
     List<ingredient> defaultIngredients = List.of(
         new ingredient("milk", 2, "litres",
             LocalDate.of(2024, 12, 30), 35.50),
+        new ingredient("yoghurt", 1.5, "litres",
+            LocalDate.of(2024, 12, 30), 28.90),
         new ingredient("bread", 1, "pc",
             LocalDate.of(2025, 1, 15), 18.90),
         new ingredient("frozen berries", 500, "grams",
             LocalDate.of(2025, 5, 10), 42.0),
         new ingredient("honey", 250, "grams",
             LocalDate.of(2030, 1, 20), 89.90),
+        new ingredient("chia seeds", 500, "grams",
+            LocalDate.of(2025, 5, 10), 80),
+        new ingredient("oats", 1000, "grams",
+            LocalDate.of(2025, 2, 11), 25),
         new ingredient("peanut butter", 400, "grams",
             LocalDate.of(2025, 8, 12), 65.6),
         new ingredient("egg", 12, "pc",
@@ -119,7 +123,6 @@ public class UI {
     }
     System.out.println("Defaulting ingredient has been added. ");
   }
-
 
   /**
    * Method: Set default recipes
@@ -397,6 +400,15 @@ public class UI {
     recipe recipe = new recipe(name, description, instructions, ingredients, portions);
     cookBook.addRecipe(recipe);
     System.out.println(recipe);
+  }
+
+  /**
+   *
+   */
+  public void checkRecipe() {
+    System.out.println("Enter recipe name:");
+    String name = lines.nextLine();
+    foodStorage.checkRecipe(cookBook.findRecipeByName(name));
   }
 
   /**

@@ -1,12 +1,8 @@
 package edu.ntnu.idi.idatt;
 
-public class recipeIngredient {
+public record recipeIngredient(String name, double amount, String unit) {
 
-  private final String name;
-  private final double amount;
-  private final String unit;
-
-  public recipeIngredient(String name, double amount, String unit) {
+  public recipeIngredient {
     if (name == null || name.trim().isEmpty()) {
       throw new IllegalArgumentException("Name is null or empty");
     }
@@ -16,21 +12,6 @@ public class recipeIngredient {
     if (unit == null || unit.trim().isEmpty()) {
       throw new IllegalArgumentException("Unit is null or empty");
     }
-    this.name = name;
-    this.amount = amount;
-    this.unit = unit;
-  }
-
-  public String getName() {
-    return name;
-  }
-
-  public double getAmount() {
-    return amount;
-  }
-
-  public String getUnit() {
-    return unit;
   }
 
   @Override
