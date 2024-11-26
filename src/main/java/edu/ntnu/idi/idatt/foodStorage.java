@@ -75,6 +75,12 @@ public class foodStorage {
    * @param amount The amount that user want to remove
    */
   public void removeIngredient(String name, double amount) {
+    if (name == null || name.trim().isEmpty()) {
+      throw new IllegalArgumentException("Name is null or empty");
+    }
+    if (amount <= 0) {
+      throw new IllegalArgumentException("Amount must be greater than 0");
+    }
     List<ingredient> copies = new ArrayList<>();
     double total = 0;
     for (ingredient i : foodStorage) {
@@ -115,12 +121,6 @@ public class foodStorage {
   }
 
   /**
-   * Method: Return list of ingredients that has expired Create a new arraylist "stillGood". For
-   * loop goes through the ingredients and adds the ones that has an expiration date that is before
-   * the given date to the expired list. I sort the list in date order and return the list.
-   */
-
-  /**
    * Method: Get expired products Create a new array list willExpire that in a for loop goes through
    * the list foodStorage. If the ingredients have an expiration date before input date then they
    * are added to the new list.
@@ -153,7 +153,7 @@ public class foodStorage {
         totalPrice += i.getPrice();
       }
     }
-    return totalPrice;
+    return Math.round(totalPrice * 100) / 100.0;
   }
 
   /**
@@ -170,9 +170,12 @@ public class foodStorage {
   }
 
   /**
-   * @param recipe
+   * @param recipe fixing
    */
   public void checkRecipe(recipe recipe) {
+    if (recipe == null) {
+      throw new IllegalArgumentException("Recipe does not exist");
+    }
     List<recipeIngredient> missingIngredients = new ArrayList<>();
     for (recipeIngredient ing : recipe.getIngredients()) {
       double totalAmount = 0;

@@ -8,7 +8,6 @@ import java.util.Scanner;
 public class UI {
 
   public foodStorage foodStorage;
-  public recipe recipe;
   public cookBook cookBook;
 
   private Scanner lines;
@@ -311,7 +310,11 @@ public class UI {
     System.out.println("Enter ingredient name: ");
     String name = lines.nextLine();
     try {
-      System.out.println(foodStorage.getIngredient(name));
+      if (foodStorage.getIngredient(name).isEmpty()) {
+        System.out.println("Ingredient not found");
+      } else {
+        System.out.println(foodStorage.getIngredient(name));
+      }
     } catch (IllegalArgumentException e) {
       System.out.println("Invalid input: " + e.getMessage());
     }
@@ -352,10 +355,14 @@ public class UI {
     int day = numbers.nextInt();
     try {
       LocalDate date = LocalDate.of(year, month, day);
-      System.out.println(
-          "These products will expire before " + date + ":\n" + foodStorage.expireBefore(date)
-              + "\nTotal price: " +
-              foodStorage.totalPriceExpiration(date) + " kr.");
+      if (foodStorage.expireBefore(date).isEmpty()) {
+        System.out.println("No expired ingredients found.");
+      } else {
+        System.out.println(
+            "These products will expire before " + date + ":\n" + foodStorage.expireBefore(date)
+                + "\nTotal price: " +
+                foodStorage.totalPriceExpiration(date) + " kr.");
+      }
     } catch (IllegalArgumentException e) {
       System.out.println("Error: " + e.getMessage());
     }
@@ -381,25 +388,29 @@ public class UI {
     System.out.println("Enter amount of portions:");
     int portions = numbers.nextInt();
     List<recipeIngredient> ingredients = new ArrayList<>();
-    while (true) {
-      System.out.println("Enter 1. to add ingredient or 2. to stop adding");
-      int choice = numbers.nextInt();
-      if (choice == 2) {
-        break;
+    try {
+      while (true) {
+        System.out.println("Enter 1. to add ingredient or 2. to stop adding");
+        int choice = numbers.nextInt();
+        if (choice == 2) {
+          break;
+        }
+        System.out.println("Enter ingredient name:");
+        String ingredientName = lines.nextLine();
+        System.out.println("Enter ingredient amount:");
+        double ingredientAmount = numbers.nextDouble();
+        System.out.println("Enter ingredient unit of measurement:");
+        String ingredientUnit = lines.nextLine();
+        recipeIngredient ingredient = new recipeIngredient(ingredientName, ingredientAmount,
+            ingredientUnit);
+        ingredients.add(ingredient);
       }
-      System.out.println("Enter ingredient name:");
-      String ingredientName = lines.nextLine();
-      System.out.println("Enter ingredient amount:");
-      double ingredientAmount = numbers.nextDouble();
-      System.out.println("Enter ingredient unit of measurement:");
-      String ingredientUnit = lines.nextLine();
-      recipeIngredient ingredient = new recipeIngredient(ingredientName, ingredientAmount,
-          ingredientUnit);
-      ingredients.add(ingredient);
+      recipe recipe = new recipe(name, description, instructions, ingredients, portions);
+      cookBook.addRecipe(recipe);
+      System.out.println(recipe);
+    } catch (IllegalArgumentException e) {
+      System.out.println("Error: " + e.getMessage());
     }
-    recipe recipe = new recipe(name, description, instructions, ingredients, portions);
-    cookBook.addRecipe(recipe);
-    System.out.println(recipe);
   }
 
   /**
@@ -408,7 +419,11 @@ public class UI {
   public void checkRecipe() {
     System.out.println("Enter recipe name:");
     String name = lines.nextLine();
-    foodStorage.checkRecipe(cookBook.findRecipeByName(name));
+    try {
+      foodStorage.checkRecipe(cookBook.findRecipeByName(name));
+    } catch (IllegalArgumentException e) {
+      System.out.println("Error: " + e.getMessage());
+    }
   }
 
   /**

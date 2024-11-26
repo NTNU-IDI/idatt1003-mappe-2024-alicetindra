@@ -1,14 +1,14 @@
 package edu.ntnu.idi.idatt;
 
-import java.time.LocalDate; //to be able to use best before date
+import java.time.LocalDate;
 
 public class ingredient {
 
-  private final String name;//name of ingredient
-  private double amount;//amount of ingredient, user will be able to change amount
-  private final String measureUnit; //what the amount is measured in, liters, grams, stk
-  private final LocalDate expirationDate; //to check the expiration date
-  private final double price; //price per ingredient unit
+  private final String name;
+  private double amount;
+  private final String measureUnit;
+  private final LocalDate expirationDate;
+  private final double price;
 
   public ingredient(String name, double amount, String measureUnit, LocalDate expirationDate,
       double price) {
@@ -42,15 +42,11 @@ public class ingredient {
     return amount;
   }
 
-  public void setAmount(double amount) {// change amount of the ingredient
-    if (amount < 0) { //make sure the amount is greater than 0
+  public void setAmount(double amount) {
+    if (amount < 0) {
       throw new IllegalArgumentException("Amount cannot be negative");
     }
     this.amount = amount;
-  }
-
-  public String getMeasureUnit() {
-    return measureUnit;
   }
 
   public LocalDate getExpirationDate() {

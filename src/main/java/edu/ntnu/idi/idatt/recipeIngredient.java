@@ -16,7 +16,7 @@ public record recipeIngredient(String name, double amount, String unit) {
 
   @Override
   public String toString() {
-    return +amount + " " + unit + " " + name + "\n";
+    return amount + " " + unit + " " + name + "\n";
   }
 
 }
