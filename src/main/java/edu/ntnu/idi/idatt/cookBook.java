@@ -7,15 +7,18 @@ public class cookBook {
 
   private final List<recipe> recipes;
 
+  public foodStorage foodStorage;
+
   public cookBook() {
     recipes = new ArrayList<>();
+    foodStorage = new foodStorage();
   }
 
   public void addRecipe(recipe recipe) {
     recipes.add(recipe);
   }
 
-  public List<recipe> printRecipes() {
+  public List<recipe> getRecipes() {
     return recipes;
   }
 

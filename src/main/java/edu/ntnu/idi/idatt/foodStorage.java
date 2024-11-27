@@ -9,6 +9,7 @@ public class foodStorage {
 
   private final List<ingredient> foodStorage;
 
+
   /**
    * Method: Constructor
    * <p></p>The constructor
@@ -169,10 +170,20 @@ public class foodStorage {
     return Math.round(totalPrice * 100.0) / 100.0;
   }
 
+
   /**
-   * @param recipe fixing
+   * @param recipe
    */
   public void checkRecipe(recipe recipe) {
+    List<recipeIngredient> missingIngredients = calculateMissingIngredients(recipe);
+    printMissingIngredients(recipe.getName(), missingIngredients);
+  }
+
+  /**
+   * @param recipe
+   * @return
+   */
+  public List<recipeIngredient> calculateMissingIngredients(recipe recipe) {
     if (recipe == null) {
       throw new IllegalArgumentException("Recipe does not exist");
     }
@@ -189,10 +200,19 @@ public class foodStorage {
         missingIngredients.add(new recipeIngredient(ing.name(), missingAmount, ing.unit()));
       }
     }
+    return missingIngredients;
+  }
+
+  /**
+   * @param recipeName
+   * @param missingIngredients
+   */
+  private void printMissingIngredients(String recipeName,
+      List<recipeIngredient> missingIngredients) {
     if (missingIngredients.isEmpty()) {
-      System.out.println("You have all the ingredients for " + recipe.getName());
+      System.out.println("You have all the ingredients for " + recipeName);
     } else {
-      System.out.println("You are missing the following ingredients for " + recipe.getName() + ":");
+      System.out.println("You are missing the following ingredients for " + recipeName + ":");
       for (recipeIngredient miss : missingIngredients) {
         System.out.println("-" + miss.amount() + " " + miss.unit() + " of " + miss.name());
       }

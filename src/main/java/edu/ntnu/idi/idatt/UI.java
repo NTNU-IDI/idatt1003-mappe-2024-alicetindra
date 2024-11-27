@@ -77,7 +77,7 @@ public class UI {
             printRecipe();
             break;
           case 10:
-            System.out.println("Give suggestions for recipe based on items in food storage");
+            suggestRecipe();
             break;
           default:
             System.out.println("Invalid choice");
@@ -110,12 +110,20 @@ public class UI {
             LocalDate.of(2025, 2, 11), 25),
         new ingredient("peanut butter", 400, "grams",
             LocalDate.of(2025, 8, 12), 65.6),
+        new ingredient("butter", 500, "grams",
+            LocalDate.of(2025, 2, 12), 56.90),
         new ingredient("egg", 12, "pc",
             LocalDate.of(2025, 2, 24), 46.0),
         new ingredient("flour", 1000, "grams",
             LocalDate.of(2025, 3, 18), 38.9),
         new ingredient("ground beef", 800, "grams",
-            LocalDate.of(2025, 1, 10), 70.0));
+            LocalDate.of(2025, 1, 10), 70.0),
+        new ingredient("salt", 500, "grams",
+            LocalDate.of(2026, 10, 23), 60),
+        new ingredient("pepper", 500, "grams",
+            LocalDate.of(2026, 12, 3), 45),
+        new ingredient("cream", 0.4, "litres",
+            LocalDate.of(2025, 1, 15), 35.6));
 
     for (ingredient i : defaultIngredients) {
       foodStorage.registerIngredient(i);
@@ -277,7 +285,7 @@ public class UI {
   /**
    * Method:
    */
-  public void registerIngredient() {
+  private void registerIngredient() {
     System.out.println("Enter grocery name: ");
     String name = lines.nextLine();
     System.out.println("Enter grocery amount: ");
@@ -306,7 +314,7 @@ public class UI {
   /**
    *
    */
-  public void searchIngredient() {
+  private void searchIngredient() {
     System.out.println("Enter ingredient name: ");
     String name = lines.nextLine();
     try {
@@ -323,7 +331,7 @@ public class UI {
   /**
    *
    */
-  public void removeIngredient() {
+  private void removeIngredient() {
     System.out.println("Enter ingredient name: ");
     String name = lines.nextLine();
     System.out.println("What amount should be removed?");
@@ -339,14 +347,14 @@ public class UI {
   /**
    *
    */
-  public void printSortedIngredients() {
+  private void printSortedIngredients() {
     System.out.println(foodStorage.sortedList());
   }
 
   /**
    * Have to check exception and test negative!!
    */
-  public void expireBefore() {
+  private void expireBefore() {
     System.out.println("Enter expiration year: ");
     int year = numbers.nextInt();
     System.out.println("Enter expiration month: ");
@@ -371,14 +379,14 @@ public class UI {
   /**
    *
    */
-  public void totalPrice() {
+  private void totalPrice() {
     System.out.println("Total price of ingredients: " + foodStorage.totalPrice() + " kr.");
   }
 
   /**
    *
    */
-  public void registerRecipe() {
+  private void registerRecipe() {
     System.out.println("Enter recipe name:");
     String name = lines.nextLine();
     System.out.println("Enter recipe description:");
@@ -416,7 +424,7 @@ public class UI {
   /**
    *
    */
-  public void checkRecipe() {
+  private void checkRecipe() {
     System.out.println("Enter recipe name:");
     String name = lines.nextLine();
     try {
@@ -429,8 +437,29 @@ public class UI {
   /**
    *
    */
-  public void printRecipe() {
-    System.out.println(cookBook.printRecipes());
+  private void printRecipe() {
+    System.out.println(cookBook.getRecipes());
+  }
+
+
+  private void suggestRecipe() {
+    List<recipe> suggestedRecipes = new ArrayList<>();
+
+    for (recipe recipe : cookBook.getRecipes()) {
+      List<recipeIngredient> missingIngredients = foodStorage.calculateMissingIngredients(recipe);
+
+      if (missingIngredients.isEmpty()) {
+        suggestedRecipes.add(recipe);
+      }
+    }
+    if (suggestedRecipes.isEmpty()) {
+      System.out.println("No suggested recipes found.");
+    } else {
+      System.out.println("Suggested recipes:");
+      for (recipe r : suggestedRecipes) {
+        System.out.println(r + "\n");
+      }
+    }
   }
 
 
