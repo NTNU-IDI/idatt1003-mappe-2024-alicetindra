@@ -59,21 +59,14 @@ public class foodStorage {
     return search;
   }
 
+
   /**
-   * Method: Remove certain amount of ingredient
-   * <p>Creates new array list called copies. If there are ingredients with same name these are put
-   * in this list If total amount of the named ingredient is less than the user wants to remove an
-   * exception is thrown. The created list copies is sorted by expiration date. The one with
-   * earliest date goes through while loop first. While amount you want to remove is greater than 0
-   * thw while loop continues. If the amount of the first ingredient is more than input amount a new
-   * amount is set for the ingredient and amount is set to 0. If the amount of the ingredient is
-   * equal to input amount the ingredient is removed from the foodStorage list and input amount is
-   * set to 0. Lastly it the amount of the ingredient is less than the input amount, the new input
-   * amount is amount minus ingredient amount. And the ingredient will be removed from
-   * foodStorage.</p>
+   * Removes a specified amount of an ingredient from the food storage.
    *
-   * @param name   The name of the ingredient the user want to use
-   * @param amount The amount that user want to remove
+   * @param name   the name of the ingredient to be removed (case-insensitive)
+   * @param amount the quantity to remove; must be positive and less than or equal to the current
+   *               quantity
+   * @throws IllegalArgumentException if the ingredient is not found or the amount is invalid
    */
   public void removeIngredient(String name, double amount) {
     if (name == null || name.trim().isEmpty()) {
@@ -130,6 +123,9 @@ public class foodStorage {
    * @return Returning list of ingredients that will have expired before the input date.
    */
   public List<ingredient> expireBefore(LocalDate date) {
+    if (date == null) {
+      throw new IllegalArgumentException("Date is null");
+    }
     List<ingredient> willExpire = new ArrayList<>();
     for (ingredient i : foodStorage) {
       if (i.getExpirationDate().isBefore(date)) {
