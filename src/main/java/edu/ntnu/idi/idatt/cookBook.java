@@ -8,17 +8,18 @@ import java.util.List;
  * retrieving possible.
  *
  * <p>The class provides methods for registering a recipe to cook book, retrieving a recipe from
- * the
- * cook book and retrieving a recipe by name.</p>
+ * the cookbook and retrieving a recipe by name.</p>
  *
- * @author Tindra ??????????
+ * @author Tindra
+ * @version 3.0
+ * @since 1.3
  */
 public class cookBook {
 
   private final List<recipe> cookBook = new ArrayList<>();
 
   /**
-   * Register recipe in cook book.
+   * Register recipe in cookbook.
    *
    * @param recipe is the recipe to be registered.
    * @throws IllegalArgumentException if recipe name already exist in cookBook array.
@@ -33,7 +34,7 @@ public class cookBook {
   }
 
   /**
-   * Retrieves a list of recipes in the cook book.
+   * Retrieves a list of recipes in the cookbook.
    *
    * @return a list representing all the recipes in cook book.
    */

@@ -20,8 +20,8 @@ import java.util.Scanner;
  * in food storage.</p>
  *
  * @author Tindra Lindgren
- * @version 1.0
- * @since 2024-11-27
+ * @version 3.0
+ * @since 0.2
  */
 public class UI {
 
@@ -168,7 +168,7 @@ public class UI {
     String expirationDate = lines.nextLine();
 
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    LocalDate date = null;
+    LocalDate date;
 
     try {
       date = LocalDate.parse(expirationDate, formatter);
@@ -314,6 +314,7 @@ public class UI {
     } catch (IllegalArgumentException e) {
       System.out.println("Error: " + e.getMessage());
     }
+
   }
 
   /**

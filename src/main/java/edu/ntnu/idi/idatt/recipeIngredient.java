@@ -12,7 +12,9 @@ package edu.ntnu.idi.idatt;
  * @param name   is a String representing the name of the recipe ingredient.
  * @param amount is a double representing the recipe ingredient amount.
  * @param unit   is a String representing the unit of measurement that is used for the amount.
- * @author Tindra ?????????????????????
+ * @author Tindra
+ * @version 3.0
+ * @since 1.2
  */
 public record recipeIngredient(String name, double amount, String unit) {
 

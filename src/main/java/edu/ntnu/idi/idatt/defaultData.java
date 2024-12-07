@@ -8,7 +8,8 @@ import java.util.List;
  * retrieve a list of default ingredients and recipes.
  *
  * @author Tindra
- * @version 1 ?????????????????????????????????????
+ * @version 3.0
+ * @since 2.0
  */
 public class defaultData {
 
@@ -21,7 +22,7 @@ public class defaultData {
   public static List<ingredient> getDefaultIngredients() {
     return List.of(
         new ingredient("milk", 2, "litres",
-            LocalDate.of(2025, 11, 29), 35.50),
+            LocalDate.of(2025, 1, 14), 35.50),
         new ingredient("yoghurt", 1.5, "litres",
             LocalDate.of(2024, 12, 30), 28.90),
         new ingredient("bread", 1, "pc",
@@ -33,7 +34,7 @@ public class defaultData {
         new ingredient("chia seeds", 500, "grams",
             LocalDate.of(2025, 5, 10), 80),
         new ingredient("oats", 1000, "grams",
-            LocalDate.of(2025, 2, 11), 25),
+            LocalDate.of(2025, 6, 11), 25),
         new ingredient("peanut butter", 400, "grams",
             LocalDate.of(2025, 8, 12), 65.6),
         new ingredient("butter", 500, "grams",

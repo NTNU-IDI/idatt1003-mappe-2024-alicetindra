@@ -10,7 +10,9 @@ import java.util.List;
  * <p>The class consists of a constructor to create a recipe, along with get methods for parameter
  * 'name' and 'ingredients'.</p>
  *
- * @author Tindra ????????????????????
+ * @author Tindra
+ * @version 3.0
+ * @since 1.1
  */
 public class recipe {
 

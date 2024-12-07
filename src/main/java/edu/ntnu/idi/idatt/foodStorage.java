@@ -14,7 +14,9 @@ import java.util.List;
  * for a recipe, and calculate total price for all ingredients in addition to total price of expired
  * ingredients.</p>
  *
- * @author Tindra ??????????????????
+ * @author Tindra
+ * @version 3.0
+ * @since 0.3
  */
 public class foodStorage {
 
@@ -26,7 +28,6 @@ public class foodStorage {
    * the new ingredient is added.
    *
    * @param ing the ingredient to be registered.
-   * @throw
    */
   public void registerIngredient(ingredient ing) {
 
@@ -72,7 +73,8 @@ public class foodStorage {
    */
   public void removeIngredient(String name, double amount) {
     if (name == null || name.trim().isEmpty()) {
-      throw new IllegalArgumentException("Name is null or empty");
+      throw new IllegalArgumentException(
+          "The string for the parameter 'Name' was blank, try again.");
     }
     if (amount <= 0) {
       throw new IllegalArgumentException("Amount must be greater than 0");
@@ -85,8 +87,12 @@ public class foodStorage {
         total += i.getAmount();
       }
     }
+    if (copies.isEmpty()) {
+      throw new IllegalArgumentException("No ingredient by that name is registered.");
+    }
     if (total < amount) {
-      throw new IllegalArgumentException("Not enough ingredients");
+      throw new IllegalArgumentException(
+          "There is not enough of this ingredient, for it to be removed.");
     }
     copies.sort(Comparator.comparing(ingredient::getExpirationDate));
     while (amount > 0) {
@@ -142,7 +148,6 @@ public class foodStorage {
    *
    * @param date is a LocalDate to compare the ingredient's expiration dates against.
    * @return a double representing the total price for all expired ingredients.
-   * @throws
    */
   public double totalPriceExpiration(LocalDate date) {
     double totalPrice = 0;
@@ -179,10 +184,11 @@ public class foodStorage {
    */
   public void checkRecipe(recipe recipe) {
     if (recipe == null) {
-      throw new IllegalArgumentException("Recipe does not exist");
+      throw new IllegalArgumentException("Recipe is null or does not exist, try again.");
     }
     List<recipeIngredient> missingIngredients = calculateMissingIngredients(recipe);
     printMissingIngredients(recipe.getName(), missingIngredients);
+    System.out.println(recipe);
   }
 
   /**
@@ -228,6 +234,5 @@ public class foodStorage {
       }
     }
   }
-
 
 }

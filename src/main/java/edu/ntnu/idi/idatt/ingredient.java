@@ -9,7 +9,9 @@ import java.time.LocalDate;
  * <p>The class contains a constructor to create an ingredient. It includes get methods for each
  * parameter and a set method for amount.</p>
  *
- * @author Tindra ????????????????????
+ * @author Tindra
+ * @version 3.0
+ * @since 0.1
  */
 public class ingredient {
 
@@ -31,7 +33,7 @@ public class ingredient {
    * @throws IllegalArgumentException if the String 'name' is null or only whitespace, the double
    *                                  'amount' is less or equal to 0, the String 'measureUnit' is
    *                                  null or only whitespace, the LocalDate 'expirationDate' is
-   *                                  null or in the past, or price is negative.
+   *                                  null, or price is negative.
    */
   public ingredient(String name, double amount, String measureUnit, LocalDate expirationDate,
       double price) {
@@ -47,9 +49,9 @@ public class ingredient {
       throw new IllegalArgumentException(
           "The string for the parameter 'MeasureUnit' was blank, try again.");
     }
-    if (expirationDate == null || expirationDate.isBefore(LocalDate.now())) {
+    if (expirationDate == null) {
       throw new IllegalArgumentException(
-          "The LocalDate for the parameter 'Expiration Date' is blank of in the past, try again.");
+          "The LocalDate for the parameter 'Expiration Date' is blank, try again.");
     }
     if (price < 0) {
       throw new IllegalArgumentException(
