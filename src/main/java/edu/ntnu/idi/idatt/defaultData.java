@@ -3,12 +3,25 @@ package edu.ntnu.idi.idatt;
 import java.time.LocalDate;
 import java.util.List;
 
+/**
+ * Default data class provides default data for ingredients and recipes. It includes methods to
+ * retrieve a list of default ingredients and recipes.
+ *
+ * @author Tindra
+ * @version 1 ?????????????????????????????????????
+ */
 public class defaultData {
 
+  /**
+   * Registers ingredients and returns a list of default ingredients with name, amount, unit of
+   * measurement, expiration date, and price.
+   *
+   * @return a list of ingredients.
+   */
   public static List<ingredient> getDefaultIngredients() {
     return List.of(
         new ingredient("milk", 2, "litres",
-            LocalDate.of(2024, 12, 30), 35.50),
+            LocalDate.of(2025, 11, 29), 35.50),
         new ingredient("yoghurt", 1.5, "litres",
             LocalDate.of(2024, 12, 30), 28.90),
         new ingredient("bread", 1, "pc",
@@ -39,6 +52,12 @@ public class defaultData {
             LocalDate.of(2025, 1, 15), 35.6));
   }
 
+  /**
+   * Creates and returns a list of default recipe with name, description, instructions, ingredients,
+   * and servings.
+   *
+   * @return list of recipes.
+   */
   public static List<recipe> getDefaultRecipes() {
     return List.of(
         createOats(),
@@ -49,7 +68,12 @@ public class defaultData {
         createSpinachStew());
   }
 
-
+  /**
+   * Creates and returns a recipe for 'Overnight oats' with name, description, instructions,
+   * ingredients and servings.
+   *
+   * @return recipe for overnight oats.
+   */
   private static recipe createOats() {
     List<recipeIngredient> oats = List.of(new recipeIngredient("oats", 35, "grams"),
         new recipeIngredient("milk", 0.1, "litres"),
@@ -67,6 +91,12 @@ public class defaultData {
         oats, 1);
   }
 
+  /**
+   * Creates and returns a recipe for 'Banana pancake' with name, description, instructions,
+   * ingredients and servings.
+   *
+   * @return recipe for banana pancake.
+   */
   private static recipe createBananaPancake() {
     List<recipeIngredient> bananaPancakes = List.of(new recipeIngredient("banana", 1, "pc"),
         new recipeIngredient("egg", 2, "pc"),
@@ -80,6 +110,12 @@ public class defaultData {
             4. Enjoy with peanut butter:)""", bananaPancakes, 1);
   }
 
+  /**
+   * Creates and returns a recipe for 'Scrambles eggs' with name, description, instructions,
+   * ingredients and servings.
+   *
+   * @return recipe for scrambles eggs.
+   */
   private static recipe createEggs() {
     List<recipeIngredient> scrambledEggs = List.of(new recipeIngredient("egg", 3, "pc"),
         new recipeIngredient("cream", 0.1, "litres"),
@@ -95,6 +131,12 @@ public class defaultData {
             4. Take pan off the heat and continue stirring.""", scrambledEggs, 2);
   }
 
+  /**
+   * Creates and returns a recipe for 'Red curry chicken' with name, description, instructions,
+   * ingredients and servings.
+   *
+   * @return recipe for red curry chicken.
+   */
   private static recipe createRedCurry() {
     List<recipeIngredient> redCurryChicken = List.of(new recipeIngredient("chicken", 600, "grams"),
         new recipeIngredient("yellow onion", 1, "pc"),
@@ -115,6 +157,12 @@ public class defaultData {
             6. Cook the rice according to the package and serve""", redCurryChicken, 4);
   }
 
+  /**
+   * Creates and returns a recipe for 'Bolognese' with name, description, instructions, ingredients
+   * and servings.
+   *
+   * @return recipe for bolognese.
+   */
   private static recipe createBolognese() {
     List<recipeIngredient> bolognese = List.of(new recipeIngredient("minced meat", 500, "grams"),
         new recipeIngredient("tomato sauce", 0.5, "litres"),
@@ -136,6 +184,12 @@ public class defaultData {
             5. Cook pasta according to package""", bolognese, 4);
   }
 
+  /**
+   * Creates and returns a recipe for 'Spinach stew' with name, description, instructions,
+   * ingredients and servings.
+   *
+   * @return recipe for spinach stew.
+   */
   private static recipe createSpinachStew() {
     List<recipeIngredient> spinachStew = List.of(new recipeIngredient("spinach", 1000, "grams"),
         new recipeIngredient("minced meat", 500, "grams"),

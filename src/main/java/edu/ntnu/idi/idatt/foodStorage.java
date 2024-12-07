@@ -5,26 +5,28 @@ import java.util.Comparator;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The foodStorage class manages a collection of ingredients, making operations such as
+ * registration, removal, and calculations possible.
+ *
+ * <p> The class provides functionalities such as registering, getting, removing, and printing
+ * ingredients. As well as checking for expired ingredients, checking if there is enough ingredients
+ * for a recipe, and calculate total price for all ingredients in addition to total price of expired
+ * ingredients.</p>
+ *
+ * @author Tindra ??????????????????
+ */
 public class foodStorage {
 
-  private final List<ingredient> foodStorage;
-
-
-  /**
-   * Method: Constructor
-   * <p></p>The constructor
-   * Creating an arraylist called foodStorage
-   */
-  public foodStorage() {
-    foodStorage = new ArrayList<>();
-  }
+  private final List<ingredient> foodStorage = new ArrayList<>();
 
   /**
-   * Method: Register ingredient in arraylist foodStorage.
-   * <p>Using for loop to go through all existing ingredients. If no ingredient with same name or
-   * expiration date. The new ingredient is added as a new element.
+   * Register ingredient in food storage. If there's already is an ingredient with the same name and
+   * expiration date. The amount from the new ingredient is added to the already existing one. Else
+   * the new ingredient is added.
    *
-   * @param ing The method takes in an ingredient that is created.
+   * @param ing the ingredient to be registered.
+   * @throw
    */
   public void registerIngredient(ingredient ing) {
 
@@ -39,16 +41,16 @@ public class foodStorage {
   }
 
   /**
-   * Method: Get ingredient by name.
-   * <p>Search for ingredient in foodStorage by name, and the ingredients is added to a new
-   * arraylist called "search".
+   * Retrieves a List of ingredients with a specified name.
    *
-   * @param name Method takes in string parameter. Searching for a name of an ingredient.
-   * @return Returning the new composed list of all ingredients with the same name.
+   * @param name is a string representing the name of the ingredient to search for.
+   * @return is a list representing all ingredients with the parameter name.
+   * @throws IllegalArgumentException if the String 'name' is null or only whitespace.
    */
   public List<ingredient> getIngredient(String name) {
     if (name == null || name.trim().isEmpty()) {
-      throw new IllegalArgumentException("Name is null or empty");
+      throw new IllegalArgumentException(
+          "The string for the parameter 'Name' was blank, try again.");
     }
     List<ingredient> search = new ArrayList<>();
     for (ingredient i : foodStorage) {
@@ -59,14 +61,14 @@ public class foodStorage {
     return search;
   }
 
-
   /**
    * Removes a specified amount of an ingredient from the food storage.
    *
-   * @param name   the name of the ingredient to be removed (case-insensitive)
-   * @param amount the quantity to remove; must be positive and less than or equal to the current
-   *               quantity
-   * @throws IllegalArgumentException if the ingredient is not found or the amount is invalid
+   * @param name   is a string representing the name of the ingredient that are to be removed.
+   * @param amount the quantity to remove.
+   * @throws IllegalArgumentException if the String 'name' is null or only whitespace, the double
+   *                                  'amount' is less or equal to 0, or the amount of the
+   *                                  ingredient is less then the parameter amount.
    */
   public void removeIngredient(String name, double amount) {
     if (name == null || name.trim().isEmpty()) {
@@ -95,7 +97,7 @@ public class foodStorage {
         } else if (i.getAmount() == amount) {
           foodStorage.remove(i);
           amount = 0;
-        } else { //if(i.getAmount() < amount)
+        } else {
           amount -= i.getAmount();
           foodStorage.remove(i);
         }
@@ -104,10 +106,9 @@ public class foodStorage {
   }
 
   /**
-   * Method: Sort list of ingredients in foodStorage.
-   * <p>Sort foodStorage list with comparator by name</p>
+   * Returns a sorted list of ingredients in foodStorage, sorted by name in alphabetical order.
    *
-   * @return Returning the arraylist foodStorage in alphabetical order.
+   * @return a sorted list of ingredients in foodStorage.
    */
   public List<ingredient> sortedList() {
     foodStorage.sort(Comparator.comparing(ingredient::getName));
@@ -115,16 +116,16 @@ public class foodStorage {
   }
 
   /**
-   * Method: Get expired products Create a new array list willExpire that in a for loop goes through
-   * the list foodStorage. If the ingredients have an expiration date before input date then they
-   * are added to the new list.
+   * Returns a list of ingredients that will expire before the given date.
    *
-   * @param date User input a date they want to compare the ingredient's expiration date.
-   * @return Returning list of ingredients that will have expired before the input date.
+   * @param date is a LocalDate to compare the ingredient's expiration dates against.
+   * @return a list of ingredients expiring before the given date.
+   * @throws IllegalArgumentException if the LocalDate 'expirationDate' is null.
    */
   public List<ingredient> expireBefore(LocalDate date) {
     if (date == null) {
-      throw new IllegalArgumentException("Date is null");
+      throw new IllegalArgumentException(
+          "The LocalDate for the parameter 'Expiration Date' is blank, try again.");
     }
     List<ingredient> willExpire = new ArrayList<>();
     for (ingredient i : foodStorage) {
@@ -137,11 +138,11 @@ public class foodStorage {
   }
 
   /**
-   * Method: Get total price for non expired items. Go through foodStorage list and if expiration
-   * date is before user input the price of the ingredient is added to double totalPrice
+   * Calculates the total price of all ingredients that will expire before the given date.
    *
-   * @param date input for chosen date
-   * @return Returning total price for all non expired ingredients.
+   * @param date is a LocalDate to compare the ingredient's expiration dates against.
+   * @return a double representing the total price for all expired ingredients.
+   * @throws
    */
   public double totalPriceExpiration(LocalDate date) {
     double totalPrice = 0;
@@ -154,9 +155,9 @@ public class foodStorage {
   }
 
   /**
-   * Method: Calculate total price
+   * Calculates the total price of all ingredients.
    *
-   * @return Return total price with max two decimals
+   * @return a double representing the total price for all ingredients.
    */
   public double totalPrice() {
     double totalPrice = 0;
@@ -168,26 +169,35 @@ public class foodStorage {
 
 
   /**
-   * @param recipe
+   * Checks if the ingredients for a given recipe are available in the food storage. Prints out the
+   * missing ingredients if any.
+   *
+   * @param recipe is the recipe to check against.
+   * @throws IllegalArgumentException if recipe is null or not found.
+   * @see #calculateMissingIngredients(recipe)
+   * @see #printMissingIngredients(String, List)
    */
   public void checkRecipe(recipe recipe) {
+    if (recipe == null) {
+      throw new IllegalArgumentException("Recipe does not exist");
+    }
     List<recipeIngredient> missingIngredients = calculateMissingIngredients(recipe);
     printMissingIngredients(recipe.getName(), missingIngredients);
   }
 
   /**
-   * @param recipe
-   * @return
+   * Calculate the missing ingredients for a recipe.
+   *
+   * @param recipe is the recipe to calculate missing ingredients for.
+   * @return a List of missing ingredients.
    */
   public List<recipeIngredient> calculateMissingIngredients(recipe recipe) {
-    if (recipe == null) {
-      throw new IllegalArgumentException("Recipe does not exist");
-    }
     List<recipeIngredient> missingIngredients = new ArrayList<>();
     for (recipeIngredient ing : recipe.getIngredients()) {
       double totalAmount = 0;
       for (ingredient i : foodStorage) {
-        if (i.getName().equalsIgnoreCase(ing.name())) {
+        if (i.getName().equalsIgnoreCase(ing.name()) && i.getExpirationDate()
+            .isAfter(LocalDate.now())) {
           totalAmount += i.getAmount();
         }
       }
@@ -200,8 +210,12 @@ public class foodStorage {
   }
 
   /**
-   * @param recipeName
-   * @param missingIngredients
+   * Prints the missing ingredients for a given recipe. The {@code missingIngredients} parameter is
+   * a list generated by the {@link #calculateMissingIngredients(recipe)} method
+   *
+   * @param recipeName         is a String representing the name of the recipe.
+   * @param missingIngredients Is a List of missing ingredients generated by the
+   *                           {@link #calculateMissingIngredients(recipe)} method.
    */
   private void printMissingIngredients(String recipeName,
       List<recipeIngredient> missingIngredients) {

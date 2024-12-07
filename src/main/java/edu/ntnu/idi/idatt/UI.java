@@ -2,6 +2,7 @@ package edu.ntnu.idi.idatt;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
@@ -9,10 +10,14 @@ import java.util.Scanner;
 
 /**
  * This class represents the User Interface for the program. Handles all user interactions such as
- * displaying menus, receiving input, and delegating tasks to other classes.
+ * displaying menus, receiving input, setting up default data and delegating tasks to other
+ * classes.
  *
- * <p>Uses {@link foodStorage} for managing ingredients and {@link cookBook}
- * for handling recipes.</p>
+ * <p>This class includes methods for registering ingredients as well as recipes, checking for
+ * ingredients in food storage, remove ingredients from food storage, checking for expired
+ * ingredients before a certain date, calculating total price of ingredients, checking if food
+ * storage has enough ingredients for a recipe and suggesting a recipe according to the ingredients
+ * in food storage.</p>
  *
  * @author Tindra Lindgren
  * @version 1.0
@@ -40,7 +45,8 @@ public class UI {
 
 
   /**
-   *
+   * Initializes the application by initializing instances of foodStorage and cookBook, sets up the
+   * input scanners, and populates default ingredients and recipes.
    */
   public void init() {
 
@@ -55,7 +61,32 @@ public class UI {
   }
 
   /**
-   *
+   * Retrieves and registers the default ingredients from {@link defaultData} and adds each
+   * ingredient to {@link foodStorage}.
+   */
+  private void setDefaultIngredients() {
+    List<ingredient> defaultIngredients = defaultData.getDefaultIngredients();
+    for (ingredient i : defaultIngredients) {
+      foodStorage.registerIngredient(i);
+    }
+    System.out.println("Defaulting ingredient has been added. ");
+  }
+
+  /**
+   * Retrieves and register the default recipes from {@link defaultData} and adds ech recipes to
+   * {@link cookBook}.
+   */
+  private void setDefaultRecipes() {
+    List<recipe> defaultRecipes = defaultData.getDefaultRecipes();
+    for (recipe r : defaultRecipes) {
+      cookBook.registerRecipe(r);
+    }
+    System.out.println("Default recipes have been added.");
+  }
+
+  /**
+   * Starts the application. Displays menu, retrieving the selected menu choice and executes the
+   * selected method for the choice.
    */
   public void start() {
     while (true) {
@@ -76,7 +107,8 @@ public class UI {
   }
 
   /**
-   *
+   * Displays the menu options to the user and asks user to input a number that represents an action
+   * in the menu.
    */
   private void displayMenu() {
     System.out.println("""
@@ -92,11 +124,15 @@ public class UI {
         9. Print out all recipes.
         10. Give suggestions for recipe based on items in food storage.
         0. Exit program.
+        
+        Please enter a number between 0 and 10.
         """);
   }
 
   /**
-   * @param choice
+   * Handles the input from the user and executes the selected functionality.
+   *
+   * @param choice is an integer representing the rmenu option selected by the user.
    */
   private void handleMenu(int choice) {
     switch (choice) {
@@ -110,12 +146,13 @@ public class UI {
       case CHECK_RECIPE -> checkRecipe();
       case PRINT_RECIPES -> printRecipe();
       case SUGGEST_RECIPE -> suggestRecipe();
-      default -> System.out.println("Invalid choice. Choose between 0-10.");
+      default -> System.out.println("Invalid choice. Choose number between 0-10.");
     }
   }
 
   /**
-   *
+   * Registers a new ingredient by inquiring the user for different parameters. If there is a
+   * problem registering the ingredient, the user is prompted the reason why the problem occurred.
    */
   private void registerIngredient() {
     System.out.println("Enter grocery name: ");
@@ -129,9 +166,16 @@ public class UI {
 
     System.out.println("Enter expiration date in format yyyy-mm-dd: ");
     String expirationDate = lines.nextLine();
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    LocalDate date = LocalDate.parse(expirationDate, formatter);
 
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    LocalDate date = null;
+
+    try {
+      date = LocalDate.parse(expirationDate, formatter);
+    } catch (DateTimeParseException e) {
+      System.out.println("Invalid date format. Try again with: yyyy-mm-dd.");
+      return;
+    }
     System.out.println("Enter price of grocery: ");
     double price = numbers.nextDouble();
     try {
@@ -145,7 +189,8 @@ public class UI {
   }
 
   /**
-   *
+   * Searches for an ingredient by name and displays the result. If input is invalid the user is
+   * prompted the reason why.
    */
   private void searchIngredient() {
     System.out.println("Enter ingredient name: ");
@@ -162,7 +207,7 @@ public class UI {
   }
 
   /**
-   *
+   * Removes a specific amount of an ingredient by name.
    */
   private void removeIngredient() {
     System.out.println("Enter ingredient name: ");
@@ -178,14 +223,15 @@ public class UI {
   }
 
   /**
-   *
+   * Prints out a list of all ingredients in {@link foodStorage} in alphabetical order.
    */
   private void printSortedIngredients() {
     System.out.println(foodStorage.sortedList());
   }
 
   /**
-   * Have to check exception and test negative!!
+   * Prints out a list of ingredient that expire before a specified date, along with the total price
+   * for these expired products.
    */
   private void expireBefore() {
     System.out.println("Enter expiration date in format yyyy-mm-dd: ");
@@ -199,22 +245,28 @@ public class UI {
         System.out.println(
             "These products will expire before " + date + ":\n" + foodStorage.expireBefore(date)
                 + "\nTotal price: " +
-                foodStorage.totalPriceExpiration(date) + " kr.");
+                foodStorage.totalPriceExpiration(date)
+                + " kr.\nBut remember that a lot of products "
+                + "are still good after it's expiration date. Smell and try the product before throwing it out.");
       }
     } catch (IllegalArgumentException e) {
       System.out.println("Error: " + e.getMessage());
+    } catch (DateTimeParseException e) {
+      System.out.println("Invalid date format. Try again with: yyyy-mm-dd.");
     }
   }
 
   /**
-   *
+   * Prints out the total price for all ingredients.
    */
   private void totalPrice() {
     System.out.println("Total price of ingredients: " + foodStorage.totalPrice() + " kr.");
   }
 
   /**
-   *
+   * Registers a new recipe by inquiring the user for different parameters and adds it to
+   * {@link cookBook}. If there is a problem registering the recipe, the user is prompted the reason
+   * why the problem occurred.
    */
   private void registerRecipe() {
     System.out.println("Enter recipe name:");
@@ -244,7 +296,7 @@ public class UI {
         ingredients.add(ingredient);
       }
       recipe recipe = new recipe(name, description, instructions, ingredients, portions);
-      cookBook.addRecipe(recipe);
+      cookBook.registerRecipe(recipe);
       System.out.println(recipe);
     } catch (IllegalArgumentException e) {
       System.out.println("Error: " + e.getMessage());
@@ -266,9 +318,6 @@ public class UI {
 
   /**
    * Prints all recipes in {@link cookBook}.
-   *
-   * <p>This method checks to see if there are any recipes found in {@link cookBook}. If there are
-   * recipes they will be printed out.</p>
    */
   private void printRecipe() {
     if (cookBook.getRecipes().isEmpty()) {
@@ -280,12 +329,6 @@ public class UI {
 
   /**
    * Suggests recipes based on the ingredients available in the food storage.
-   *
-   * <p>This method iterates through all recipes in the {@link cookBook}, checks if
-   * the necessary ingredients are available in sufficient quantities in the {@link foodStorage},
-   * and suggests recipes that can be made or nearly made.</p>
-   *
-   * @throws IllegalArgumentException if an error occurs during recipe lookup.
    */
   private void suggestRecipe() {
     List<recipe> suggestedRecipes = new ArrayList<>();
@@ -305,26 +348,6 @@ public class UI {
         System.out.println(r + "\n");
       }
     }
-  }
-
-
-  /**
-   *
-   */
-  private void setDefaultIngredients() {
-    List<ingredient> defaultIngredients = defaultData.getDefaultIngredients();
-    for (ingredient i : defaultIngredients) {
-      foodStorage.registerIngredient(i);
-    }
-    System.out.println("Defaulting ingredient has been added. ");
-  }
-
-  private void setDefaultRecipes() {
-    List<recipe> defaultRecipes = defaultData.getDefaultRecipes();
-    for (recipe r : defaultRecipes) {
-      cookBook.addRecipe(r);
-    }
-    System.out.println("Default recipes have been added.");
   }
 
 
