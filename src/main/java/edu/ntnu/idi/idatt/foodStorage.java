@@ -72,7 +72,7 @@ public class foodStorage {
    *                                  ingredient is less then the parameter amount.
    */
   public void removeIngredient(String name, double amount) {
-    if (name == null || name.trim().isEmpty()) {
+    if (name == null || name.isBlank()) {
       throw new IllegalArgumentException(
           "The string for the parameter 'Name' was blank, try again.");
     }

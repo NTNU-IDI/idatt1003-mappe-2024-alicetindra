@@ -37,21 +37,21 @@ public class ingredient {
    */
   public ingredient(String name, double amount, String measureUnit, LocalDate expirationDate,
       double price) {
-    if (name == null || name.trim().isEmpty()) {
+    if (name == null || name.isBlank()) {
       throw new IllegalArgumentException(
-          "The string for the parameter 'Name' was blank, try again.");
+          "The string for the parameter 'Name' was blank, empty or null. Try again.");
     }
     if (amount <= 0) {
       throw new IllegalArgumentException(
           "The double for the parameter 'Amount' must be greater than 0, try again.");
     }
-    if (measureUnit == null || measureUnit.trim().isEmpty()) {
+    if (measureUnit == null || measureUnit.isBlank()) {
       throw new IllegalArgumentException(
-          "The string for the parameter 'MeasureUnit' was blank, try again.");
+          "The string for the parameter 'MeasureUnit' was blank, empty or null. Try again.");
     }
     if (expirationDate == null) {
       throw new IllegalArgumentException(
-          "The LocalDate for the parameter 'Expiration Date' is blank, try again.");
+          "The LocalDate for the parameter 'Expiration Date' is null, try again.");
     }
     if (price < 0) {
       throw new IllegalArgumentException(

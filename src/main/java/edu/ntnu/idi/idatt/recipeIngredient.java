@@ -26,7 +26,7 @@ public record recipeIngredient(String name, double amount, String unit) {
    *                                  null or only whitespace.
    */
   public recipeIngredient {
-    if (name == null || name.trim().isEmpty()) {
+    if (name == null || name.isBlank()) {
       throw new IllegalArgumentException(
           "The string for the parameter 'Name' was blank, try again.");
     }

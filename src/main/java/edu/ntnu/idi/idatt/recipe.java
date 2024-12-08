@@ -38,15 +38,15 @@ public class recipe {
    */
   public recipe(String name, String description, String howTo, List<recipeIngredient> ingredients,
       int portions) {
-    if (name == null || name.trim().isEmpty()) {
+    if (name == null || name.isBlank()) {
       throw new IllegalArgumentException(
           "The string for the parameter 'Name' was blank, try again.");
     }
-    if (description == null || description.trim().isEmpty()) {
+    if (description == null || description.isBlank()) {
       throw new IllegalArgumentException(
           "The string for the parameter 'Description' was blank, try again.");
     }
-    if (howTo == null || howTo.trim().isEmpty()) {
+    if (howTo == null || howTo.isBlank()) {
       throw new IllegalArgumentException(
           "The string for the parameter 'HowTo' was blank, try again.");
     }
