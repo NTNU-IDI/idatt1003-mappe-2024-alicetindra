@@ -39,6 +39,9 @@ public class cookBook {
    * @return a list representing all the recipes in cook book.
    */
   public List<recipe> getRecipes() {
+    if (cookBook.isEmpty()) {
+      throw new IllegalArgumentException("No recipes found.");
+    }
     return cookBook;
   }
 
@@ -49,6 +52,9 @@ public class cookBook {
    * @return a recipe with the given name.
    */
   public recipe findRecipeByName(String name) {
+    if (name == null || name.isBlank()) {
+      throw new IllegalArgumentException("Recipe name is null or empty.");
+    }
     for (recipe recipe : cookBook) {
       if (recipe.getName().equalsIgnoreCase(name)) {
         return recipe;

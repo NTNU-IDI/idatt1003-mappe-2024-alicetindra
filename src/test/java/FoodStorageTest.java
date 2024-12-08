@@ -21,16 +21,25 @@ import org.junit.jupiter.api.Test;
  *
  * <ul>
  *   <li>Testing that it is possible for an ingredient to register to the foodStorage. </li>
+ *   <li>Testing that the list of ingredients can be sorted in alphabetical order.</li>
+ *   <li>Testing that it is possible to calculate the price for all expired ingredients.</li>
+ *   <li>Testing that it is possible to calculate the price for all ingredients.</li>
  * </ul>
  *
  * <p>Negative tests:</p>
  *
  * <ul>
- *   <li></li>
- *
+ *   <li>Testing that it is not possible to retrieve ingredient with a name that is empty, blank,
+ *   or has the value 'null'.</li>
+ *   <li>Testing that it is not possible to remove an ingredient with a name that is empty, blank,
+ *   or has the value 'null', the ingredient doesn't exist or has a value less than the remove
+ *   amount, or the removal amount is negative or 0.</li>
+ *   <li> Testing that is it not possible to collect ingredients with a certain expiration date if
+ *   the date parameter is null.</li>
+ *   <li>Testing that it is not possible to check recipe if the recipe parameter is null.</li>
  * </ul>
  */
-public class foodStorageTest {
+public class FoodStorageTest {
 
 
   private foodStorage storage;
@@ -39,7 +48,7 @@ public class foodStorageTest {
   private ingredient ingredient3;
 
   /**
-   *
+   * Sets up the test environment before each test.
    */
   @BeforeEach
   void setUp() {
@@ -55,7 +64,15 @@ public class foodStorageTest {
   //-------------------------------POSITIVE TESTS-------------------------------------
 
   /**
+   * Test registering an ingredient in foodStorage where we provide valid parameters.
    *
+   * <p>This is a <b>positive</b> test since we are testing the functionality that the class
+   * recipe is expected to have/implement.</p>
+   *
+   * <p>Expected outcome: An ingredient is registered, and when asking for size of the list, we
+   * expect the number of ingredients we have registered. And when asking for the name of the
+   * ingredient, we expect the parameters returned to be the same as provided.
+   * </p>
    */
   @Test
   void registerIngredientWithValidInput() {
@@ -72,6 +89,17 @@ public class foodStorageTest {
     assertEquals(ingredient3, storage.getIngredient("sugar").getFirst());
   }
 
+  /**
+   * Test sorting list of ingredients in foodStorage in alphabetical order.
+   *
+   * <p>This is a <b>positive</b> test since we are testing the functionality that the class
+   * recipe is expected to have/implement.</p>
+   *
+   * <p>Expected outcome: 2 ingredients are registered and when asking for the first element in the
+   * list we expect the ingredient with a name that is the first in order. In this case milk in
+   * first place and sugar in second.
+   * </p>
+   */
   @Test
   void sortedListAlphabetically() {
     storage.registerIngredient(ingredient1);
@@ -83,6 +111,17 @@ public class foodStorageTest {
     assertEquals("sugar", sortedList.get(1).getName());
   }
 
+  /**
+   * Test calculating total price for expired ingredients in foodStorage
+   *
+   * <p>This is a <b>positive</b> test since we are testing the functionality that the class
+   * recipe is expected to have/implement.</p>
+   *
+   * <p>Expected outcome: We set an expiration date that will only expire onw ingredient, we then
+   * expect the totalPrice to match the price of the expired ingredient. Later text includes both
+   * ingredients and we expect the totalPrice to match the sum of the two ingredients.
+   * </p>
+   */
   @Test
   void totalPriceExpiration() {
     storage.registerIngredient(ingredient1);
@@ -96,7 +135,13 @@ public class foodStorageTest {
   }
 
   /**
+   * Test calculating total price for ingredients in foodStorage
    *
+   * <p>This is a <b>positive</b> test since we are testing the functionality that the class
+   * recipe is expected to have/implement.</p>
+   *
+   * <p>Expected outcome: We expect the totalPrice to match the sum of the two ingredients.
+   * </p>
    */
   @Test
   void totalPrice() {
@@ -110,7 +155,11 @@ public class foodStorageTest {
   //-------------------------------NEGATIVE TESTS-------------------------------------
 
   /**
+   * Test retrieving an ingredient in foodStorage where the name provided has an invalid value null,
+   * is empty or blank (a string of only white spaces).
    *
+   * <p>Expected outcome: An instance should not be retrieved if the name is set to null, is empty
+   * or blank, and an IllegalArgumentException should be thrown.</p>
    */
   @Test
   void getIngredientWithInvalidInput() {
@@ -125,7 +174,14 @@ public class foodStorageTest {
   }
 
   /**
+   * Test removing an ingredient in foodStorage where the name provided has an invalid value null,
+   * is empty or blank (a string of only white spaces). Or the ingredient doesn't exist or has a
+   * less value than the remove amount. Or the removal amount is negative or 0.
    *
+   * <p>Expected outcome: An instance should not be retrieved if the name is set to null, is empty
+   * or blank, the ingredient doesn't exist or has a less
+   * * value than the remove amount, or the removal amount is negative or 0 and an
+   * IllegalArgumentException should be thrown.</p>
    */
   @Test
   void removeIngredientWithInvalidInput() {
@@ -148,7 +204,11 @@ public class foodStorageTest {
   }
 
   /**
+   * Test collecting ingredients in foodStorage with an expiration date before the given parameter
+   * with a value null.
    *
+   * <p>Expected outcome: Ingredients should not be collected if the expiration date parameter is
+   * set to null, and an IllegalArgumentException should be thrown.</p>
    */
   @Test
   void expireBeforeWithNullDate() {
@@ -163,7 +223,11 @@ public class foodStorageTest {
   }
 
   /**
+   * Test checking if foodStorage has enough ingredients for a certain recipe with the recipe
+   * parameter being null.
    *
+   * <p>Expected outcome: Method should not be able to check the ingredients for a recipe when
+   * parameter recipe is null, and an IllegalArgumentException should be thrown.</p>
    */
   @Test
   void testCheckRecipe() {

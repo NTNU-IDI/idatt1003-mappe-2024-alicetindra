@@ -321,10 +321,12 @@ public class UI {
    * Prints all recipes in {@link cookBook}.
    */
   private void printRecipe() {
-    if (cookBook.getRecipes().isEmpty()) {
-      System.out.println("No recipes found");
+    try {
+      System.out.println(cookBook.getRecipes());
+    } catch (IllegalArgumentException e) {
+      System.out.println("Error: " + e.getMessage());
     }
-    System.out.println(cookBook.getRecipes());
+
   }
 
 

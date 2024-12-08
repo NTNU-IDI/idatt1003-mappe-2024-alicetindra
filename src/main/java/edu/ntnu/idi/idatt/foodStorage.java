@@ -184,7 +184,7 @@ public class foodStorage {
    */
   public void checkRecipe(recipe recipe) {
     if (recipe == null) {
-      throw new IllegalArgumentException("Recipe is null or does not exist, try again.");
+      throw new IllegalArgumentException("Recipe does not exist, try again.");
     }
     List<recipeIngredient> missingIngredients = calculateMissingIngredients(recipe);
     printMissingIngredients(recipe.getName(), missingIngredients);

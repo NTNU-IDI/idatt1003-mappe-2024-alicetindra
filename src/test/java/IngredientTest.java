@@ -1,11 +1,9 @@
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
+
 
 import edu.ntnu.idi.idatt.ingredient;
-import edu.ntnu.idi.idatt.recipeIngredient;
 import java.time.LocalDate;
 import org.junit.jupiter.api.Test;
 
@@ -35,7 +33,7 @@ import org.junit.jupiter.api.Test;
  *  <li>Testing that it is not possible to crate an ingredient with a negative price.</li>
  * </ul>
  */
-public class ingredientTest {
+public class IngredientTest {
 
   //-------------------------------POSITIVE TESTS-------------------------------------
 
@@ -93,7 +91,7 @@ public class ingredientTest {
    * Test creation of an instance of ingredient where the name provided is an invalid blank
    * string.(A string of only white spaces)
    *
-   * <p>Expected outcome: An instance should not be created if the name is set to aa blank string,
+   * <p>Expected outcome: An instance should not be created if the name is set to a blank string,
    * and an IllegalArgumentException should be thrown.</p>
    */
   @Test
