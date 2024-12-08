@@ -70,6 +70,20 @@ public class IngredientTest {
     assertEquals(10, ingredient.getAmount());
   }
 
+  /**
+   * Test an instance of ingredient toString.
+   *
+   * <p>Expected outcome: A string " grocery{ milk, 2.0 litres, Expiration date: 2025-01-20, 20.0
+   * kr.}\n" is expected.</p>
+   */
+  @Test
+  void testToString() {
+    ingredient ingredient = new ingredient("milk", 2.0, "litres",
+        LocalDate.of(2025, 1, 20), 20);
+    String expected = " grocery{ milk, 2.0 litres, Expiration date: 2025-01-20, 20.0 kr.}\n";
+    assertEquals(expected, ingredient.toString());
+  }
+
   //-------------------------------NEGATIVE TESTS-------------------------------------
 
   /**
