@@ -126,9 +126,9 @@ public class DefaultData {
     return new Recipe("Scrambled eggs",
         "High protein breakfast on its own or on a piece of toast.",
         """
-            1. Mix all the ingredients well with a fork or whisk.
+            1. Mix all the ingredients well.
             2. Turn frying pan on low to medium heat.
-            3. Pour in egg mixture and stir with a wooden spoon until the consistency is close to what you want.
+            3. Pour in egg mixture and stir until the consistency is close to what you want.
             4. Take pan off the heat and continue stirring.""", scrambledEggs, 2);
   }
 
@@ -151,7 +151,7 @@ public class DefaultData {
     return new Recipe("Red curry chicken", "A classic thai curry served with rice",
         """
             1. Cut the chicken in small pieces.
-            2. Peal and finely chop onion and garlic as well as shred the bell pepper
+            2. Peal and finely chop onion and garlic, and shred the bell pepper.
             3. Fry the chicken in cooking oil in a frying pan
             4. Fry the garlic with the red curry paste. Add onion, bell pepper, coconut milk and water
             5. Add the chicken and let it simmer, 5-10 minutes.

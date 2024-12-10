@@ -1,15 +1,15 @@
 package edu.ntnu.idi.idatt;
 
 import java.time.LocalDate;
-import java.util.Comparator;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 /**
  * The foodStorage class manages a collection of ingredients, making operations such as
  * registration, removal, and calculations possible.
  *
- * <p> The class provides functionalities such as registering, getting, removing, and printing
+ * <p>The class provides functionalities such as registering, getting, removing, and printing
  * ingredients. As well as checking for expired ingredients, checking if there is enough ingredients
  * for a recipe, and calculate total price for all ingredients in addition to total price of expired
  * ingredients.</p>

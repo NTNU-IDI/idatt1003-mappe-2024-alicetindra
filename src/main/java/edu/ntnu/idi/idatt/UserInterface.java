@@ -23,7 +23,7 @@ import java.util.Scanner;
  * @version 3.0
  * @since 0.2
  */
-public class UI {
+public class UserInterface {
 
   private static final int REGISTER_INGREDIENT = 1;
   private static final int SEARCH_INGREDIENT = 2;
@@ -115,7 +115,7 @@ public class UI {
         Menu:
         1. Register new ingredient.
         2. Search for an ingredient in food storage.
-        3. Remove a certain amount of ingredient from food storage.
+        3. Remove an amount of an ingredient from food storage.
         4. Print out overview of ingredients in food storage.
         5. Print out ingredients that expire before a certain date + total price of expiring products.
         6. Calculate total price of groceries.
@@ -124,7 +124,6 @@ public class UI {
         9. Print out all recipes.
         10. Give suggestions for recipe based on items in food storage.
         0. Exit program.
-        
         Please enter a number between 0 and 10.
         """);
   }
@@ -244,8 +243,8 @@ public class UI {
       } else {
         System.out.println(
             "These products will expire before " + date + ":\n" + foodStorage.expireBefore(date)
-                + "\nTotal price: " +
-                foodStorage.totalPriceExpiration(date)
+                + "\nTotal price: "
+                + foodStorage.totalPriceExpiration(date)
                 + " kr.\nBut remember that a lot of products "
                 + "are still good after it's expiration date. Smell and try the product before throwing it out.");
       }
@@ -304,7 +303,7 @@ public class UI {
   }
 
   /**
-   *
+   * Checks a recipe is there is enough ingredients in {@link FoodStorage}.
    */
   private void checkRecipe() {
     System.out.println("Enter recipe name:");

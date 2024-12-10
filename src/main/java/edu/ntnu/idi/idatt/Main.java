@@ -16,7 +16,7 @@ public class Main {
    * @param args are the arguments for the main method.
    */
   public static void main(String[] args) {
-    UI ui = new UI();
+    UserInterface ui = new UserInterface();
     ui.init();
     ui.start();
   }

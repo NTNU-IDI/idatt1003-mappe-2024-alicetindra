@@ -91,8 +91,8 @@ public class Recipe {
    */
   @Override
   public String toString() {
-    return "\nRecipe for " + name + " - " + portions + " portions" + "\nDescription: " +
-        description + "\nIngredients:\n" + ingredients + "Instructions:\n" + howTo + "\n";
+    return "\nRecipe for " + name + " - " + portions + " portions" + "\nDescription: "
+        + description + "\nIngredients:\n" + ingredients + "Instructions:\n" + howTo + "\n";
   }
 
 }

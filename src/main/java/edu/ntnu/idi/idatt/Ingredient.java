@@ -75,7 +75,7 @@ public class Ingredient {
   }
 
   /**
-   * Returns a double representing the amount of an ingredient
+   * Returns a double representing the amount of an ingredient.
    *
    * @return double representing ingredient amount.
    */
