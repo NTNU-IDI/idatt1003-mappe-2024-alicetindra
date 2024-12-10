@@ -1,4 +1,4 @@
-import edu.ntnu.idi.idatt.recipeIngredient;
+import edu.ntnu.idi.idatt.RecipeIngredient;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -44,7 +44,7 @@ public class RecipeIngredientTest {
    */
   @Test
   void createInstanceWithValidParameters() {
-    recipeIngredient ingredient = new recipeIngredient("milk", 2.0, "litres");
+    RecipeIngredient ingredient = new RecipeIngredient("milk", 2.0, "litres");
 
     assertEquals("milk", ingredient.name());
     assertEquals(2.0, ingredient.amount());
@@ -58,7 +58,7 @@ public class RecipeIngredientTest {
    */
   @Test
   void testToString() {
-    recipeIngredient ingredient = new recipeIngredient("milk", 2.0, "litres");
+    RecipeIngredient ingredient = new RecipeIngredient("milk", 2.0, "litres");
     assertEquals("2.0 litres milk\n", ingredient.toString());
   }
 
@@ -74,7 +74,7 @@ public class RecipeIngredientTest {
   @Test
   void createInstanceWithInvalidNullName() {
     IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
-        () -> new recipeIngredient(null, 2.0, "litres"));
+        () -> new RecipeIngredient(null, 2.0, "litres"));
     assertEquals("The string for the parameter 'Name' was blank, try again.",
         exception.getMessage());
   }
@@ -89,7 +89,7 @@ public class RecipeIngredientTest {
   @Test
   void createInstanceWithInvalidEmptyName() {
     IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
-        () -> new recipeIngredient("", 2.0, "litres"));
+        () -> new RecipeIngredient("", 2.0, "litres"));
     assertEquals("The string for the parameter 'Name' was blank, try again.",
         exception.getMessage());
   }
@@ -104,7 +104,7 @@ public class RecipeIngredientTest {
   @Test
   void createInstanceWithInvalidBlankName() {
     IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
-        () -> new recipeIngredient("  ", 2.0, "litres"));
+        () -> new RecipeIngredient("  ", 2.0, "litres"));
     assertEquals("The string for the parameter 'Name' was blank, try again.",
         exception.getMessage());
   }
@@ -113,7 +113,7 @@ public class RecipeIngredientTest {
   @Test
   void createInstanceWithInvalidNegativeAmount() {
     IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
-        () -> new recipeIngredient("milk", -1.0, "litres"));
+        () -> new RecipeIngredient("milk", -1.0, "litres"));
     assertEquals("The double for the parameter 'Amount' must be greater than 0, try again.",
         exception.getMessage());
   }
@@ -121,7 +121,7 @@ public class RecipeIngredientTest {
   @Test
   void createInstanceWithInvalidZeroAmount() {
     IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
-        () -> new recipeIngredient("milk", 0, "litres"));
+        () -> new RecipeIngredient("milk", 0, "litres"));
     assertEquals("The double for the parameter 'Amount' must be greater than 0, try again.",
         exception.getMessage());
   }
@@ -136,7 +136,7 @@ public class RecipeIngredientTest {
   @Test
   void createInstanceWithInvalidNullMeasureUnit() {
     IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
-        () -> new recipeIngredient("milk", 2.0, null));
+        () -> new RecipeIngredient("milk", 2.0, null));
     assertEquals("The string for the parameter 'unit' was blank, try again.",
         exception.getMessage());
   }
@@ -151,7 +151,7 @@ public class RecipeIngredientTest {
   @Test
   void createInstanceWithInvalidEmptyMeasureUnit() {
     IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
-        () -> new recipeIngredient("milk", 2.0, ""));
+        () -> new RecipeIngredient("milk", 2.0, ""));
     assertEquals("The string for the parameter 'unit' was blank, try again.",
         exception.getMessage());
   }
@@ -166,7 +166,7 @@ public class RecipeIngredientTest {
   @Test
   void createInstanceWithInvalidBlankMeasureUnit() {
     IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
-        () -> new recipeIngredient("milk", 2.0, " "));
+        () -> new RecipeIngredient("milk", 2.0, " "));
     assertEquals("The string for the parameter 'unit' was blank, try again.",
         exception.getMessage());
   }

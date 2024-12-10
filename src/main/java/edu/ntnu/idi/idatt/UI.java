@@ -37,8 +37,8 @@ public class UI {
   private static final int SUGGEST_RECIPE = 10;
   private static final int EXIT_PROGRAM = 0;
 
-  public foodStorage foodStorage;
-  public cookBook cookBook;
+  public FoodStorage foodStorage;
+  public CookBook cookBook;
 
   private Scanner lines;
   private Scanner numbers;
@@ -50,8 +50,8 @@ public class UI {
    */
   public void init() {
 
-    foodStorage = new foodStorage();
-    cookBook = new cookBook();
+    foodStorage = new FoodStorage();
+    cookBook = new CookBook();
 
     lines = new Scanner(System.in);
     numbers = new Scanner(System.in);
@@ -61,24 +61,24 @@ public class UI {
   }
 
   /**
-   * Retrieves and registers the default ingredients from {@link defaultData} and adds each
-   * ingredient to {@link foodStorage}.
+   * Retrieves and registers the default ingredients from {@link DefaultData} and adds each
+   * ingredient to {@link FoodStorage}.
    */
   private void setDefaultIngredients() {
-    List<ingredient> defaultIngredients = defaultData.getDefaultIngredients();
-    for (ingredient i : defaultIngredients) {
+    List<Ingredient> defaultIngredients = DefaultData.getDefaultIngredients();
+    for (Ingredient i : defaultIngredients) {
       foodStorage.registerIngredient(i);
     }
     System.out.println("Defaulting ingredient has been added. ");
   }
 
   /**
-   * Retrieves and register the default recipes from {@link defaultData} and adds ech recipes to
-   * {@link cookBook}.
+   * Retrieves and register the default recipes from {@link DefaultData} and adds ech recipes to
+   * {@link CookBook}.
    */
   private void setDefaultRecipes() {
-    List<recipe> defaultRecipes = defaultData.getDefaultRecipes();
-    for (recipe r : defaultRecipes) {
+    List<Recipe> defaultRecipes = DefaultData.getDefaultRecipes();
+    for (Recipe r : defaultRecipes) {
       cookBook.registerRecipe(r);
     }
     System.out.println("Default recipes have been added.");
@@ -179,7 +179,7 @@ public class UI {
     System.out.println("Enter price of grocery: ");
     double price = numbers.nextDouble();
     try {
-      ingredient ingredient = new ingredient(name, amount, measureUnit,
+      Ingredient ingredient = new Ingredient(name, amount, measureUnit,
           date, price);
       System.out.println(ingredient);
       foodStorage.registerIngredient(ingredient);
@@ -223,7 +223,7 @@ public class UI {
   }
 
   /**
-   * Prints out a list of all ingredients in {@link foodStorage} in alphabetical order.
+   * Prints out a list of all ingredients in {@link FoodStorage} in alphabetical order.
    */
   private void printSortedIngredients() {
     System.out.println(foodStorage.sortedList());
@@ -265,7 +265,7 @@ public class UI {
 
   /**
    * Registers a new recipe by inquiring the user for different parameters and adds it to
-   * {@link cookBook}. If there is a problem registering the recipe, the user is prompted the reason
+   * {@link CookBook}. If there is a problem registering the recipe, the user is prompted the reason
    * why the problem occurred.
    */
   private void registerRecipe() {
@@ -277,7 +277,7 @@ public class UI {
     String instructions = lines.nextLine();
     System.out.println("Enter amount of portions:");
     int portions = numbers.nextInt();
-    List<recipeIngredient> ingredients = new ArrayList<>();
+    List<RecipeIngredient> ingredients = new ArrayList<>();
     try {
       while (true) {
         System.out.println("Enter 1. to add ingredient or 2. to stop adding");
@@ -291,11 +291,11 @@ public class UI {
         double ingredientAmount = numbers.nextDouble();
         System.out.println("Enter ingredient unit of measurement:");
         String ingredientUnit = lines.nextLine();
-        recipeIngredient ingredient = new recipeIngredient(ingredientName, ingredientAmount,
+        RecipeIngredient ingredient = new RecipeIngredient(ingredientName, ingredientAmount,
             ingredientUnit);
         ingredients.add(ingredient);
       }
-      recipe recipe = new recipe(name, description, instructions, ingredients, portions);
+      Recipe recipe = new Recipe(name, description, instructions, ingredients, portions);
       cookBook.registerRecipe(recipe);
       System.out.println(recipe);
     } catch (IllegalArgumentException e) {
@@ -318,7 +318,7 @@ public class UI {
   }
 
   /**
-   * Prints all recipes in {@link cookBook}.
+   * Prints all recipes in {@link CookBook}.
    */
   private void printRecipe() {
     try {
@@ -334,10 +334,10 @@ public class UI {
    * Suggests recipes based on the ingredients available in the food storage.
    */
   private void suggestRecipe() {
-    List<recipe> suggestedRecipes = new ArrayList<>();
+    List<Recipe> suggestedRecipes = new ArrayList<>();
 
-    for (recipe recipe : cookBook.getRecipes()) {
-      List<recipeIngredient> missingIngredients = foodStorage.calculateMissingIngredients(recipe);
+    for (Recipe recipe : cookBook.getRecipes()) {
+      List<RecipeIngredient> missingIngredients = foodStorage.calculateMissingIngredients(recipe);
 
       if (missingIngredients.isEmpty()) {
         suggestedRecipes.add(recipe);
@@ -347,7 +347,7 @@ public class UI {
       System.out.println("No suggested recipes found.");
     } else {
       System.out.println("Suggested recipes:");
-      for (recipe r : suggestedRecipes) {
+      for (Recipe r : suggestedRecipes) {
         System.out.println(r + "\n");
       }
     }

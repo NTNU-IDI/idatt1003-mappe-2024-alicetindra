@@ -2,9 +2,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import edu.ntnu.idi.idatt.cookBook;
-import edu.ntnu.idi.idatt.recipe;
-import edu.ntnu.idi.idatt.recipeIngredient;
+import edu.ntnu.idi.idatt.CookBook;
+import edu.ntnu.idi.idatt.Recipe;
+import edu.ntnu.idi.idatt.RecipeIngredient;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -35,9 +35,9 @@ import org.junit.jupiter.api.Test;
 
 public class CookBookTest {
 
-  private cookBook book;
-  private recipe recipe1;
-  private recipe recipe2;
+  private CookBook book;
+  private Recipe recipe1;
+  private Recipe recipe2;
 
   /**
    * Sets up the test environment before each test.
@@ -45,16 +45,16 @@ public class CookBookTest {
   @BeforeEach
   void setUp() {
 
-    book = new cookBook();
-    recipeIngredient ingredient1 = new recipeIngredient("milk", 0.2, "litres");
-    recipeIngredient ingredient2 = new recipeIngredient("coco powder", 50.0, "g");
+    book = new CookBook();
+    RecipeIngredient ingredient1 = new RecipeIngredient("milk", 0.2, "litres");
+    RecipeIngredient ingredient2 = new RecipeIngredient("coco powder", 50.0, "g");
 
-    List<recipeIngredient> ingredientsCoco = List.of(ingredient1, ingredient2);
-    List<recipeIngredient> ingredientsMilk = List.of(ingredient1);
+    List<RecipeIngredient> ingredientsCoco = List.of(ingredient1, ingredient2);
+    List<RecipeIngredient> ingredientsMilk = List.of(ingredient1);
 
-    recipe1 = new recipe("chocolate milk", "easy drink", "stir everything", ingredientsCoco,
+    recipe1 = new Recipe("chocolate milk", "easy drink", "stir everything", ingredientsCoco,
         1);
-    recipe2 = new recipe("just milk", "plain milk", "pour a glass", ingredientsMilk, 1);
+    recipe2 = new Recipe("just milk", "plain milk", "pour a glass", ingredientsMilk, 1);
 
   }
 
@@ -97,7 +97,7 @@ public class CookBookTest {
   void testGetRecipes() {
     book.registerRecipe(recipe1);
     book.registerRecipe(recipe2);
-    List<recipe> recipes = book.getRecipes();
+    List<Recipe> recipes = book.getRecipes();
     assertEquals(2, recipes.size());
     assertTrue(recipes.contains(recipe1));
     assertTrue(recipes.contains(recipe2));

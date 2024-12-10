@@ -18,9 +18,9 @@ import java.util.List;
  * @version 3.0
  * @since 0.3
  */
-public class foodStorage {
+public class FoodStorage {
 
-  private final List<ingredient> foodStorage = new ArrayList<>();
+  private final List<Ingredient> foodStorage = new ArrayList<>();
 
   /**
    * Register ingredient in food storage. If there's already is an ingredient with the same name and
@@ -29,9 +29,9 @@ public class foodStorage {
    *
    * @param ing the ingredient to be registered.
    */
-  public void registerIngredient(ingredient ing) {
+  public void registerIngredient(Ingredient ing) {
 
-    for (ingredient i : foodStorage) {
+    for (Ingredient i : foodStorage) {
       if (i.getName().equalsIgnoreCase(ing.getName()) && i.getExpirationDate()
           .equals(ing.getExpirationDate())) {
         i.setAmount(i.getAmount() + ing.getAmount());
@@ -48,13 +48,13 @@ public class foodStorage {
    * @return is a list representing all ingredients with the parameter name.
    * @throws IllegalArgumentException if the String 'name' is null or only whitespace.
    */
-  public List<ingredient> getIngredient(String name) {
+  public List<Ingredient> getIngredient(String name) {
     if (name == null || name.trim().isEmpty()) {
       throw new IllegalArgumentException(
           "The string for the parameter 'Name' was blank, try again.");
     }
-    List<ingredient> search = new ArrayList<>();
-    for (ingredient i : foodStorage) {
+    List<Ingredient> search = new ArrayList<>();
+    for (Ingredient i : foodStorage) {
       if (i.getName().equalsIgnoreCase(name)) {
         search.add(i);
       }
@@ -79,9 +79,9 @@ public class foodStorage {
     if (amount <= 0) {
       throw new IllegalArgumentException("Amount must be greater than 0");
     }
-    List<ingredient> copies = new ArrayList<>();
+    List<Ingredient> copies = new ArrayList<>();
     double total = 0;
-    for (ingredient i : foodStorage) {
+    for (Ingredient i : foodStorage) {
       if (i.getName().equalsIgnoreCase(name)) {
         copies.add(i);
         total += i.getAmount();
@@ -94,9 +94,9 @@ public class foodStorage {
       throw new IllegalArgumentException(
           "There is not enough of this ingredient, for it to be removed.");
     }
-    copies.sort(Comparator.comparing(ingredient::getExpirationDate));
+    copies.sort(Comparator.comparing(Ingredient::getExpirationDate));
     while (amount > 0) {
-      for (ingredient i : copies) {
+      for (Ingredient i : copies) {
         if (i.getAmount() > amount) {
           i.setAmount(i.getAmount() - amount);
           amount = 0;
@@ -116,8 +116,8 @@ public class foodStorage {
    *
    * @return a sorted list of ingredients in foodStorage.
    */
-  public List<ingredient> sortedList() {
-    foodStorage.sort(Comparator.comparing(ingredient::getName));
+  public List<Ingredient> sortedList() {
+    foodStorage.sort(Comparator.comparing(Ingredient::getName));
     return foodStorage;
   }
 
@@ -128,18 +128,18 @@ public class foodStorage {
    * @return a list of ingredients expiring before the given date.
    * @throws IllegalArgumentException if the LocalDate 'expirationDate' is null.
    */
-  public List<ingredient> expireBefore(LocalDate date) {
+  public List<Ingredient> expireBefore(LocalDate date) {
     if (date == null) {
       throw new IllegalArgumentException(
           "The LocalDate for the parameter 'Expiration Date' is blank, try again.");
     }
-    List<ingredient> willExpire = new ArrayList<>();
-    for (ingredient i : foodStorage) {
+    List<Ingredient> willExpire = new ArrayList<>();
+    for (Ingredient i : foodStorage) {
       if (i.getExpirationDate().isBefore(date)) {
         willExpire.add(i);
       }
     }
-    willExpire.sort(Comparator.comparing(ingredient::getExpirationDate));
+    willExpire.sort(Comparator.comparing(Ingredient::getExpirationDate));
     return willExpire;
   }
 
@@ -151,7 +151,7 @@ public class foodStorage {
    */
   public double totalPriceExpiration(LocalDate date) {
     double totalPrice = 0;
-    for (ingredient i : foodStorage) {
+    for (Ingredient i : foodStorage) {
       if (i.getExpirationDate().isBefore(date)) {
         totalPrice += i.getPrice();
       }
@@ -166,7 +166,7 @@ public class foodStorage {
    */
   public double totalPrice() {
     double totalPrice = 0;
-    for (ingredient i : foodStorage) {
+    for (Ingredient i : foodStorage) {
       totalPrice += i.getPrice();
     }
     return Math.round(totalPrice * 100.0) / 100.0;
@@ -179,14 +179,14 @@ public class foodStorage {
    *
    * @param recipe is the recipe to check against.
    * @throws IllegalArgumentException if recipe is null or not found.
-   * @see #calculateMissingIngredients(recipe)
+   * @see #calculateMissingIngredients(Recipe)
    * @see #printMissingIngredients(String, List)
    */
-  public void checkRecipe(recipe recipe) {
+  public void checkRecipe(Recipe recipe) {
     if (recipe == null) {
       throw new IllegalArgumentException("Recipe does not exist, try again.");
     }
-    List<recipeIngredient> missingIngredients = calculateMissingIngredients(recipe);
+    List<RecipeIngredient> missingIngredients = calculateMissingIngredients(recipe);
     printMissingIngredients(recipe.getName(), missingIngredients);
     System.out.println(recipe);
   }
@@ -197,11 +197,11 @@ public class foodStorage {
    * @param recipe is the recipe to calculate missing ingredients for.
    * @return a List of missing ingredients.
    */
-  public List<recipeIngredient> calculateMissingIngredients(recipe recipe) {
-    List<recipeIngredient> missingIngredients = new ArrayList<>();
-    for (recipeIngredient ing : recipe.getIngredients()) {
+  public List<RecipeIngredient> calculateMissingIngredients(Recipe recipe) {
+    List<RecipeIngredient> missingIngredients = new ArrayList<>();
+    for (RecipeIngredient ing : recipe.getIngredients()) {
       double totalAmount = 0;
-      for (ingredient i : foodStorage) {
+      for (Ingredient i : foodStorage) {
         if (i.getName().equalsIgnoreCase(ing.name()) && i.getExpirationDate()
             .isAfter(LocalDate.now())) {
           totalAmount += i.getAmount();
@@ -209,7 +209,7 @@ public class foodStorage {
       }
       if (totalAmount < ing.amount()) {
         double missingAmount = ing.amount() - totalAmount;
-        missingIngredients.add(new recipeIngredient(ing.name(), missingAmount, ing.unit()));
+        missingIngredients.add(new RecipeIngredient(ing.name(), missingAmount, ing.unit()));
       }
     }
     return missingIngredients;
@@ -217,19 +217,19 @@ public class foodStorage {
 
   /**
    * Prints the missing ingredients for a given recipe. The {@code missingIngredients} parameter is
-   * a list generated by the {@link #calculateMissingIngredients(recipe)} method
+   * a list generated by the {@link #calculateMissingIngredients(Recipe)} method
    *
    * @param recipeName         is a String representing the name of the recipe.
    * @param missingIngredients Is a List of missing ingredients generated by the
-   *                           {@link #calculateMissingIngredients(recipe)} method.
+   *                           {@link #calculateMissingIngredients(Recipe)} method.
    */
   private void printMissingIngredients(String recipeName,
-      List<recipeIngredient> missingIngredients) {
+      List<RecipeIngredient> missingIngredients) {
     if (missingIngredients.isEmpty()) {
       System.out.println("You have all the ingredients for " + recipeName);
     } else {
       System.out.println("You are missing the following ingredients for " + recipeName + ":");
-      for (recipeIngredient miss : missingIngredients) {
+      for (RecipeIngredient miss : missingIngredients) {
         System.out.println("-" + miss.amount() + " " + miss.unit() + " of " + miss.name());
       }
     }

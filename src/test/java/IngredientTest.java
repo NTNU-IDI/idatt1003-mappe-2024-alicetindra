@@ -3,7 +3,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
-import edu.ntnu.idi.idatt.ingredient;
+import edu.ntnu.idi.idatt.Ingredient;
 import java.time.LocalDate;
 import org.junit.jupiter.api.Test;
 
@@ -48,7 +48,7 @@ public class IngredientTest {
    */
   @Test
   void createInstanceWithValidParameters() {
-    ingredient ingredient = new ingredient("milk", 2, "litres",
+    Ingredient ingredient = new Ingredient("milk", 2, "litres",
         LocalDate.of(2025, 1, 2), 20);
 
     assertEquals("milk", ingredient.getName());
@@ -64,7 +64,7 @@ public class IngredientTest {
    */
   @Test
   void setValidAmount() {
-    ingredient ingredient = new ingredient("milk", 2, "litres",
+    Ingredient ingredient = new Ingredient("milk", 2, "litres",
         LocalDate.of(2025, 1, 2), 20);
     ingredient.setAmount(10);
     assertEquals(10, ingredient.getAmount());
@@ -78,7 +78,7 @@ public class IngredientTest {
    */
   @Test
   void testToString() {
-    ingredient ingredient = new ingredient("milk", 2.0, "litres",
+    Ingredient ingredient = new Ingredient("milk", 2.0, "litres",
         LocalDate.of(2025, 1, 20), 20);
     String expected = " grocery{ milk, 2.0 litres, Expiration date: 2025-01-20, 20.0 kr.}\n";
     assertEquals(expected, ingredient.toString());
@@ -95,7 +95,7 @@ public class IngredientTest {
   @Test
   public void createInstanceWithInvalidEmptyName() {
     IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
-        () -> new ingredient("", 2, "litres",
+        () -> new Ingredient("", 2, "litres",
             LocalDate.of(2025, 1, 2), 20));
     assertEquals("The string for the parameter 'Name' was blank, empty or null. Try again.",
         exception.getMessage());
@@ -111,7 +111,7 @@ public class IngredientTest {
   @Test
   public void createInstanceWithInvalidBlankName() {
     IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
-        () -> new ingredient("  ", 2, "litres",
+        () -> new Ingredient("  ", 2, "litres",
             LocalDate.of(2025, 1, 2), 20));
     assertEquals("The string for the parameter 'Name' was blank, empty or null. Try again.",
         exception.getMessage());
@@ -126,7 +126,7 @@ public class IngredientTest {
   @Test
   public void createInstanceWithInvalidNullName() {
     IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
-        () -> new ingredient(null, 2, "litres",
+        () -> new Ingredient(null, 2, "litres",
             LocalDate.of(2025, 1, 2), 20));
     assertEquals("The string for the parameter 'Name' was blank, empty or null. Try again.",
         exception.getMessage());
@@ -142,7 +142,7 @@ public class IngredientTest {
   @Test
   public void createInstanceWithInvalidNegativeAmount() {
     IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
-        () -> new ingredient("milk", -3, "litres",
+        () -> new Ingredient("milk", -3, "litres",
             LocalDate.of(2025, 1, 2), 20));
     assertEquals("The double for the parameter 'Amount' must be greater than 0, try again.",
         exception.getMessage());
@@ -157,7 +157,7 @@ public class IngredientTest {
   @Test
   public void createInstanceWithInvalidZeroAmount() {
     IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
-        () -> new ingredient("milk", 0, "litres",
+        () -> new Ingredient("milk", 0, "litres",
             LocalDate.of(2025, 1, 2), 20));
     assertEquals("The double for the parameter 'Amount' must be greater than 0, try again.",
         exception.getMessage());
@@ -173,7 +173,7 @@ public class IngredientTest {
   @Test
   public void createInstanceWithInvalidEmptyMeasureUnit() {
     IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
-        () -> new ingredient("milk", 2, "",
+        () -> new Ingredient("milk", 2, "",
             LocalDate.of(2025, 1, 2), 20));
     assertEquals("The string for the parameter 'MeasureUnit' was blank, empty or null. Try again.",
         exception.getMessage());
@@ -189,7 +189,7 @@ public class IngredientTest {
   @Test
   public void createInstanceWithInvalidBlankMeasureUnit() {
     IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
-        () -> new ingredient("milk", 2, "  ",
+        () -> new Ingredient("milk", 2, "  ",
             LocalDate.of(2025, 1, 2), 20));
     assertEquals("The string for the parameter 'MeasureUnit' was blank, empty or null. Try again.",
         exception.getMessage());
@@ -205,7 +205,7 @@ public class IngredientTest {
   @Test
   public void createInstanceWithInvalidNullMeasureUnit() {
     IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
-        () -> new ingredient("milk", 2, null,
+        () -> new Ingredient("milk", 2, null,
             LocalDate.of(2025, 1, 2), 20));
     assertEquals("The string for the parameter 'MeasureUnit' was blank, empty or null. Try again.",
         exception.getMessage());
@@ -221,7 +221,7 @@ public class IngredientTest {
   @Test
   public void createInstanceWithInvalidNullExpirationDate() {
     IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
-        () -> new ingredient("milk", 2, "litres", null, 20));
+        () -> new Ingredient("milk", 2, "litres", null, 20));
     assertEquals("The LocalDate for the parameter 'Expiration Date' is null, try again.",
         exception.getMessage());
   }
@@ -236,7 +236,7 @@ public class IngredientTest {
   @Test
   public void createInstanceWithInvalidNegativePrice() {
     IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
-        () -> new ingredient("milk", 2, "litres",
+        () -> new Ingredient("milk", 2, "litres",
             LocalDate.of(2025, 1, 2), -20));
     assertEquals("The double for the parameter 'Price' cannot be negative, try again.",
         exception.getMessage());

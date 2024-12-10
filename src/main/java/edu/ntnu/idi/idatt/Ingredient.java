@@ -13,7 +13,7 @@ import java.time.LocalDate;
  * @version 3.0
  * @since 0.1
  */
-public class ingredient {
+public class Ingredient {
 
   private final String name;
   private double amount;
@@ -35,7 +35,7 @@ public class ingredient {
    *                                  null or only whitespace, the LocalDate 'expirationDate' is
    *                                  null, or price is negative.
    */
-  public ingredient(String name, double amount, String measureUnit, LocalDate expirationDate,
+  public Ingredient(String name, double amount, String measureUnit, LocalDate expirationDate,
       double price) {
     if (name == null || name.isBlank()) {
       throw new IllegalArgumentException(

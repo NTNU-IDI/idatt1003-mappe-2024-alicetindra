@@ -11,7 +11,7 @@ import java.util.List;
  * @version 3.0
  * @since 2.0
  */
-public class defaultData {
+public class DefaultData {
 
   /**
    * Registers ingredients and returns a list of default ingredients with name, amount, unit of
@@ -19,37 +19,37 @@ public class defaultData {
    *
    * @return a list of ingredients.
    */
-  public static List<ingredient> getDefaultIngredients() {
+  public static List<Ingredient> getDefaultIngredients() {
     return List.of(
-        new ingredient("milk", 2, "litres",
+        new Ingredient("milk", 2, "litres",
             LocalDate.of(2025, 1, 14), 35.50),
-        new ingredient("yoghurt", 1.5, "litres",
+        new Ingredient("yoghurt", 1.5, "litres",
             LocalDate.of(2024, 12, 30), 28.90),
-        new ingredient("bread", 1, "pc",
+        new Ingredient("bread", 1, "pc",
             LocalDate.of(2025, 1, 15), 18.90),
-        new ingredient("frozen berries", 500, "grams",
+        new Ingredient("frozen berries", 500, "grams",
             LocalDate.of(2025, 5, 10), 42.0),
-        new ingredient("honey", 250, "grams",
+        new Ingredient("honey", 250, "grams",
             LocalDate.of(2030, 1, 20), 89.90),
-        new ingredient("chia seeds", 500, "grams",
+        new Ingredient("chia seeds", 500, "grams",
             LocalDate.of(2025, 5, 10), 80),
-        new ingredient("oats", 1000, "grams",
+        new Ingredient("oats", 1000, "grams",
             LocalDate.of(2025, 6, 11), 25),
-        new ingredient("peanut butter", 400, "grams",
+        new Ingredient("peanut butter", 400, "grams",
             LocalDate.of(2025, 8, 12), 65.6),
-        new ingredient("butter", 500, "grams",
+        new Ingredient("butter", 500, "grams",
             LocalDate.of(2025, 2, 12), 56.90),
-        new ingredient("egg", 12, "pc",
+        new Ingredient("egg", 12, "pc",
             LocalDate.of(2025, 2, 24), 46.0),
-        new ingredient("flour", 1000, "grams",
+        new Ingredient("flour", 1000, "grams",
             LocalDate.of(2025, 3, 18), 38.9),
-        new ingredient("ground beef", 800, "grams",
+        new Ingredient("ground beef", 800, "grams",
             LocalDate.of(2025, 1, 10), 70.0),
-        new ingredient("salt", 500, "grams",
+        new Ingredient("salt", 500, "grams",
             LocalDate.of(2026, 10, 23), 60),
-        new ingredient("pepper", 500, "grams",
+        new Ingredient("pepper", 500, "grams",
             LocalDate.of(2026, 12, 3), 45),
-        new ingredient("cream", 0.4, "litres",
+        new Ingredient("cream", 0.4, "litres",
             LocalDate.of(2025, 1, 15), 35.6));
   }
 
@@ -59,7 +59,7 @@ public class defaultData {
    *
    * @return list of recipes.
    */
-  public static List<recipe> getDefaultRecipes() {
+  public static List<Recipe> getDefaultRecipes() {
     return List.of(
         createOats(),
         createBananaPancake(),
@@ -75,15 +75,15 @@ public class defaultData {
    *
    * @return recipe for overnight oats.
    */
-  private static recipe createOats() {
-    List<recipeIngredient> oats = List.of(new recipeIngredient("oats", 35, "grams"),
-        new recipeIngredient("milk", 0.1, "litres"),
-        new recipeIngredient("yoghurt", 0.1, "litres"),
-        new recipeIngredient("honey", 20, "grams"),
-        new recipeIngredient("chia seeds", 15, "grams"),
-        new recipeIngredient("frozen berries", 40, "grams"),
-        new recipeIngredient("peanut butter", 30, "grams"));
-    return new recipe("Overnight oats", "A filing and refreshing breakfast.",
+  private static Recipe createOats() {
+    List<RecipeIngredient> oats = List.of(new RecipeIngredient("oats", 35, "grams"),
+        new RecipeIngredient("milk", 0.1, "litres"),
+        new RecipeIngredient("yoghurt", 0.1, "litres"),
+        new RecipeIngredient("honey", 20, "grams"),
+        new RecipeIngredient("chia seeds", 15, "grams"),
+        new RecipeIngredient("frozen berries", 40, "grams"),
+        new RecipeIngredient("peanut butter", 30, "grams"));
+    return new Recipe("Overnight oats", "A filing and refreshing breakfast.",
         """
             1. Mix honey, oats and chia seeds together.
             2. Add milk and yoghurt and mix well.
@@ -98,12 +98,12 @@ public class defaultData {
    *
    * @return recipe for banana pancake.
    */
-  private static recipe createBananaPancake() {
-    List<recipeIngredient> bananaPancakes = List.of(new recipeIngredient("banana", 1, "pc"),
-        new recipeIngredient("egg", 2, "pc"),
-        new recipeIngredient("peanut butter", 30, "grams"),
-        new recipeIngredient("butter", 10, "grams"));
-    return new recipe("Banana pancake", "Easy and quick breakfast",
+  private static Recipe createBananaPancake() {
+    List<RecipeIngredient> bananaPancakes = List.of(new RecipeIngredient("banana", 1, "pc"),
+        new RecipeIngredient("egg", 2, "pc"),
+        new RecipeIngredient("peanut butter", 30, "grams"),
+        new RecipeIngredient("butter", 10, "grams"));
+    return new Recipe("Banana pancake", "Easy and quick breakfast",
         """
             1. Mash banana and mix with the eggs.
             2. Heat butter on middle heat in a frying pan and add mixture.
@@ -117,13 +117,13 @@ public class defaultData {
    *
    * @return recipe for scrambles eggs.
    */
-  private static recipe createEggs() {
-    List<recipeIngredient> scrambledEggs = List.of(new recipeIngredient("egg", 3, "pc"),
-        new recipeIngredient("cream", 0.1, "litres"),
-        new recipeIngredient("salt", 5, "grams"),
-        new recipeIngredient("pepper", 5, "grams"),
-        new recipeIngredient("butter", 10, "grams"));
-    return new recipe("Scrambled eggs",
+  private static Recipe createEggs() {
+    List<RecipeIngredient> scrambledEggs = List.of(new RecipeIngredient("egg", 3, "pc"),
+        new RecipeIngredient("cream", 0.1, "litres"),
+        new RecipeIngredient("salt", 5, "grams"),
+        new RecipeIngredient("pepper", 5, "grams"),
+        new RecipeIngredient("butter", 10, "grams"));
+    return new Recipe("Scrambled eggs",
         "High protein breakfast on its own or on a piece of toast.",
         """
             1. Mix all the ingredients well with a fork or whisk.
@@ -138,17 +138,17 @@ public class defaultData {
    *
    * @return recipe for red curry chicken.
    */
-  private static recipe createRedCurry() {
-    List<recipeIngredient> redCurryChicken = List.of(new recipeIngredient("chicken", 600, "grams"),
-        new recipeIngredient("yellow onion", 1, "pc"),
-        new recipeIngredient("garlic", 3, "pc"),
-        new recipeIngredient("bell pepper", 0.5, "pc"),
-        new recipeIngredient("cooking oil", 10, "grams"),
-        new recipeIngredient("coconut milk", 0.4, "litres"),
-        new recipeIngredient("red curry paste", 50, "grams"),
-        new recipeIngredient("water", 0.2, "litres"),
-        new recipeIngredient("rice", 340, "grams"));
-    return new recipe("Red curry chicken", "A classic thai curry served with rice",
+  private static Recipe createRedCurry() {
+    List<RecipeIngredient> redCurryChicken = List.of(new RecipeIngredient("chicken", 600, "grams"),
+        new RecipeIngredient("yellow onion", 1, "pc"),
+        new RecipeIngredient("garlic", 3, "pc"),
+        new RecipeIngredient("bell pepper", 0.5, "pc"),
+        new RecipeIngredient("cooking oil", 10, "grams"),
+        new RecipeIngredient("coconut milk", 0.4, "litres"),
+        new RecipeIngredient("red curry paste", 50, "grams"),
+        new RecipeIngredient("water", 0.2, "litres"),
+        new RecipeIngredient("rice", 340, "grams"));
+    return new Recipe("Red curry chicken", "A classic thai curry served with rice",
         """
             1. Cut the chicken in small pieces.
             2. Peal and finely chop onion and garlic as well as shred the bell pepper
@@ -164,18 +164,18 @@ public class defaultData {
    *
    * @return recipe for bolognese.
    */
-  private static recipe createBolognese() {
-    List<recipeIngredient> bolognese = List.of(new recipeIngredient("minced meat", 500, "grams"),
-        new recipeIngredient("tomato sauce", 0.5, "litres"),
-        new recipeIngredient("yellow onion", 1, "pc"),
-        new recipeIngredient("bell pepper", 0.5, "pc"),
-        new recipeIngredient("carrot", 1, "pc"),
-        new recipeIngredient("garlic", 2, "pc"),
-        new recipeIngredient("pasta", 340, "grams"),
-        new recipeIngredient("butter", 10, "grams"),
-        new recipeIngredient("salt", 10, "grams"),
-        new recipeIngredient("pepper", 10, "grams"));
-    return new recipe("Pasta bolognese",
+  private static Recipe createBolognese() {
+    List<RecipeIngredient> bolognese = List.of(new RecipeIngredient("minced meat", 500, "grams"),
+        new RecipeIngredient("tomato sauce", 0.5, "litres"),
+        new RecipeIngredient("yellow onion", 1, "pc"),
+        new RecipeIngredient("bell pepper", 0.5, "pc"),
+        new RecipeIngredient("carrot", 1, "pc"),
+        new RecipeIngredient("garlic", 2, "pc"),
+        new RecipeIngredient("pasta", 340, "grams"),
+        new RecipeIngredient("butter", 10, "grams"),
+        new RecipeIngredient("salt", 10, "grams"),
+        new RecipeIngredient("pepper", 10, "grams"));
+    return new Recipe("Pasta bolognese",
         "Hearty and comforting, meaty and easy bolognese sauce recipe",
         """
             1. Chop the onion, mince garlic and grate the carrot.
@@ -191,17 +191,17 @@ public class defaultData {
    *
    * @return recipe for spinach stew.
    */
-  private static recipe createSpinachStew() {
-    List<recipeIngredient> spinachStew = List.of(new recipeIngredient("spinach", 1000, "grams"),
-        new recipeIngredient("minced meat", 500, "grams"),
-        new recipeIngredient("yellow onion", 1, "pc"),
-        new recipeIngredient("garlic", 4, "pc"),
-        new recipeIngredient("bullion cube", 2, "pc"),
-        new recipeIngredient("lemon", 1, "pc"),
-        new recipeIngredient("salt", 10, "grams"),
-        new recipeIngredient("pepper", 10, "grams"),
-        new recipeIngredient("rice", 340, "grams"));
-    return new recipe("Lebanese Spinach stew",
+  private static Recipe createSpinachStew() {
+    List<RecipeIngredient> spinachStew = List.of(new RecipeIngredient("spinach", 1000, "grams"),
+        new RecipeIngredient("minced meat", 500, "grams"),
+        new RecipeIngredient("yellow onion", 1, "pc"),
+        new RecipeIngredient("garlic", 4, "pc"),
+        new RecipeIngredient("bullion cube", 2, "pc"),
+        new RecipeIngredient("lemon", 1, "pc"),
+        new RecipeIngredient("salt", 10, "grams"),
+        new RecipeIngredient("pepper", 10, "grams"),
+        new RecipeIngredient("rice", 340, "grams"));
+    return new Recipe("Lebanese Spinach stew",
         "Sabenegh wo roz, which means spinach and rice, is an easy-to-make, fresh Lebanese spinach stew.",
         """
             1. Chop the spinach, onion and mince the garlic.

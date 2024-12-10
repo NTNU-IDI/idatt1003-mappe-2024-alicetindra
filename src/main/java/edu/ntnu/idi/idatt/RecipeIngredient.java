@@ -16,7 +16,7 @@ package edu.ntnu.idi.idatt;
  * @version 3.0
  * @since 1.2
  */
-public record recipeIngredient(String name, double amount, String unit) {
+public record RecipeIngredient(String name, double amount, String unit) {
 
   /**
    * Constructs a new recipe ingredient with a specified name, amount and unit of measurement.
@@ -25,7 +25,7 @@ public record recipeIngredient(String name, double amount, String unit) {
    *                                  'amount' is less or equal to 0, or the String 'measureUnit' is
    *                                  null or only whitespace.
    */
-  public recipeIngredient {
+  public RecipeIngredient {
     if (name == null || name.isBlank()) {
       throw new IllegalArgumentException(
           "The string for the parameter 'Name' was blank, try again.");

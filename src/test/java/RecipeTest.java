@@ -2,8 +2,8 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import edu.ntnu.idi.idatt.recipe;
-import edu.ntnu.idi.idatt.recipeIngredient;
+import edu.ntnu.idi.idatt.Recipe;
+import edu.ntnu.idi.idatt.RecipeIngredient;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
@@ -42,16 +42,16 @@ import org.junit.jupiter.api.Test;
  */
 public class RecipeTest {
 
-  private List<recipeIngredient> ingredients;
-  private List<recipeIngredient> emptyIngredients;
+  private List<RecipeIngredient> ingredients;
+  private List<RecipeIngredient> emptyIngredients;
 
   /**
    * Sets up the test environment before each test.
    */
   @BeforeEach
   void setUp() {
-    recipeIngredient ingredient1 = new recipeIngredient("tomato", 200.0, "g");
-    recipeIngredient ingredient2 = new recipeIngredient("carrot", 100.0, "g");
+    RecipeIngredient ingredient1 = new RecipeIngredient("tomato", 200.0, "g");
+    RecipeIngredient ingredient2 = new RecipeIngredient("carrot", 100.0, "g");
 
     ingredients = List.of(ingredient1, ingredient2);
   }
@@ -69,7 +69,7 @@ public class RecipeTest {
   @Test
   void createInstanceWithValidParameters() {
 
-    edu.ntnu.idi.idatt.recipe recipe = new recipe("salad", "easy salad",
+    edu.ntnu.idi.idatt.Recipe recipe = new Recipe("salad", "easy salad",
         "chop and mix", ingredients, 2);
 
     assertEquals("salad", recipe.getName());
@@ -87,7 +87,7 @@ public class RecipeTest {
   @Test
   void createInstanceWithInvalidNullName() {
     IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
-        () -> new recipe(null, "easy salad", "chop and mix", ingredients, 2));
+        () -> new Recipe(null, "easy salad", "chop and mix", ingredients, 2));
     assertEquals("The string for the parameter 'Name' was blank, try again.",
         exception.getMessage());
   }
@@ -101,7 +101,7 @@ public class RecipeTest {
   @Test
   void createInstanceWithInvalidEmptyName() {
     IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
-        () -> new recipe("", "easy salad", "chop and mix", ingredients, 2));
+        () -> new Recipe("", "easy salad", "chop and mix", ingredients, 2));
     assertEquals("The string for the parameter 'Name' was blank, try again.",
         exception.getMessage());
   }
@@ -116,7 +116,7 @@ public class RecipeTest {
   @Test
   void createInstanceWithInvalidBlankName() {
     IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
-        () -> new recipe("  ", "easy salad", "chop and mix", ingredients, 2));
+        () -> new Recipe("  ", "easy salad", "chop and mix", ingredients, 2));
     assertEquals("The string for the parameter 'Name' was blank, try again.",
         exception.getMessage());
   }
@@ -131,7 +131,7 @@ public class RecipeTest {
   @Test
   void createInstanceWithInvalidNullDescription() {
     IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
-        () -> new recipe("salad", null, "chop and mix", ingredients, 2));
+        () -> new Recipe("salad", null, "chop and mix", ingredients, 2));
     assertEquals("The string for the parameter 'Description' was blank, try again.",
         exception.getMessage());
   }
@@ -146,7 +146,7 @@ public class RecipeTest {
   @Test
   void createInstanceWithInvalidEmptyDescription() {
     IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
-        () -> new recipe("salad", "", "chop and mix", ingredients, 2));
+        () -> new Recipe("salad", "", "chop and mix", ingredients, 2));
     assertEquals("The string for the parameter 'Description' was blank, try again.",
         exception.getMessage());
   }
@@ -161,7 +161,7 @@ public class RecipeTest {
   @Test
   void createInstanceWithInvalidBlankDescription() {
     IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
-        () -> new recipe("salad", "   ", "chop and mix", ingredients, 2));
+        () -> new Recipe("salad", "   ", "chop and mix", ingredients, 2));
     assertEquals("The string for the parameter 'Description' was blank, try again.",
         exception.getMessage());
   }
@@ -176,7 +176,7 @@ public class RecipeTest {
   @Test
   void createInstanceWithInvalidNullHowTo() {
     IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
-        () -> new recipe("salad", "easy salad", null, ingredients, 2));
+        () -> new Recipe("salad", "easy salad", null, ingredients, 2));
     assertEquals("The string for the parameter 'HowTo' was blank, try again.",
         exception.getMessage());
   }
@@ -190,7 +190,7 @@ public class RecipeTest {
   @Test
   void createInstanceWithInvalidEmptyHowTo() {
     IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
-        () -> new recipe("salad", "easy salad", "", ingredients, 2));
+        () -> new Recipe("salad", "easy salad", "", ingredients, 2));
     assertEquals("The string for the parameter 'HowTo' was blank, try again.",
         exception.getMessage());
   }
@@ -205,7 +205,7 @@ public class RecipeTest {
   @Test
   void createInstanceWithInvalidBlankHowTo() {
     IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
-        () -> new recipe("salad", "easy salad", "   ", ingredients, 2));
+        () -> new Recipe("salad", "easy salad", "   ", ingredients, 2));
     assertEquals("The string for the parameter 'HowTo' was blank, try again.",
         exception.getMessage());
   }
@@ -220,7 +220,7 @@ public class RecipeTest {
   void createInstanceWithInvalidEmptyIngredients() {
     emptyIngredients = new ArrayList<>();
     IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
-        () -> new recipe("salad", "easy salad", "chop and mix", emptyIngredients, 2));
+        () -> new Recipe("salad", "easy salad", "chop and mix", emptyIngredients, 2));
     assertEquals("The List 'Ingredients' cannot be null or empty, try again.",
         exception.getMessage());
   }
@@ -234,7 +234,7 @@ public class RecipeTest {
   @Test
   void createInstanceWithInvalidNullIngredients() {
     IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
-        () -> new recipe("salad", "easy salad", "chop and mix", null, 2));
+        () -> new Recipe("salad", "easy salad", "chop and mix", null, 2));
     assertEquals("The List 'Ingredients' cannot be null or empty, try again.",
         exception.getMessage());
   }
@@ -248,7 +248,7 @@ public class RecipeTest {
   @Test
   void createInstanceWithInvalidLessThanOnePortions() {
     IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
-        () -> new recipe("salad", "easy salad", "chop and mix", ingredients, 0));
+        () -> new Recipe("salad", "easy salad", "chop and mix", ingredients, 0));
     assertEquals("The integer 'Portions' must be between 1 and 50, try again.",
         exception.getMessage());
   }
@@ -262,7 +262,7 @@ public class RecipeTest {
   @Test
   void createInstanceWithInvalidGreaterThanFiftyPortions() {
     IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
-        () -> new recipe("salad", "easy salad", "chop and mix", ingredients, 51));
+        () -> new Recipe("salad", "easy salad", "chop and mix", ingredients, 51));
     assertEquals("The integer 'Portions' must be between 1 and 50, try again.",
         exception.getMessage());
   }

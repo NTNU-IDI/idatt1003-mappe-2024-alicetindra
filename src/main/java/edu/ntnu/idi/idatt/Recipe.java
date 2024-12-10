@@ -14,12 +14,12 @@ import java.util.List;
  * @version 3.0
  * @since 1.1
  */
-public class recipe {
+public class Recipe {
 
   private final String name;
   private final String description;
   private final String howTo;
-  private final List<recipeIngredient> ingredients;
+  private final List<RecipeIngredient> ingredients;
   private final int portions;
 
   /**
@@ -36,7 +36,7 @@ public class recipe {
    *                                  'hotTo' is null or only whitespace, the List is empty, or the
    *                                  portions are less than 1 or more than 50.
    */
-  public recipe(String name, String description, String howTo, List<recipeIngredient> ingredients,
+  public Recipe(String name, String description, String howTo, List<RecipeIngredient> ingredients,
       int portions) {
     if (name == null || name.isBlank()) {
       throw new IllegalArgumentException(
@@ -76,11 +76,11 @@ public class recipe {
 
   /**
    * Returns a List of ingredients that the recipe includes. Each ingredient is an instance of the
-   * {@link recipeIngredient} class.
+   * {@link RecipeIngredient} class.
    *
    * @return list of ingredients.
    */
-  public List<recipeIngredient> getIngredients() {
+  public List<RecipeIngredient> getIngredients() {
     return ingredients;
   }
 

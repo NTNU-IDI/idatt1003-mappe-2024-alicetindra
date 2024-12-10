@@ -3,10 +3,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import edu.ntnu.idi.idatt.foodStorage;
-import edu.ntnu.idi.idatt.ingredient;
-import edu.ntnu.idi.idatt.recipe;
-import edu.ntnu.idi.idatt.recipeIngredient;
+import edu.ntnu.idi.idatt.FoodStorage;
+import edu.ntnu.idi.idatt.Ingredient;
+import edu.ntnu.idi.idatt.Recipe;
+import edu.ntnu.idi.idatt.RecipeIngredient;
 import java.time.LocalDate;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
@@ -42,22 +42,22 @@ import org.junit.jupiter.api.Test;
 public class FoodStorageTest {
 
 
-  private foodStorage storage;
-  private ingredient ingredient1;
-  private ingredient ingredient2;
-  private ingredient ingredient3;
+  private FoodStorage storage;
+  private Ingredient ingredient1;
+  private Ingredient ingredient2;
+  private Ingredient ingredient3;
 
   /**
    * Sets up the test environment before each test.
    */
   @BeforeEach
   void setUp() {
-    storage = new foodStorage();
-    ingredient1 = new ingredient("milk", 1.0, "litres",
+    storage = new FoodStorage();
+    ingredient1 = new Ingredient("milk", 1.0, "litres",
         LocalDate.of(2024, 12, 15), 20.0);
-    ingredient2 = new ingredient("milk", 2.0, "litres",
+    ingredient2 = new Ingredient("milk", 2.0, "litres",
         LocalDate.of(2024, 12, 15), 40.0);
-    ingredient3 = new ingredient("sugar", 1000.0, "g",
+    ingredient3 = new Ingredient("sugar", 1000.0, "g",
         LocalDate.of(2024, 12, 10), 10.0);
   }
 
@@ -104,7 +104,7 @@ public class FoodStorageTest {
   void sortedListAlphabetically() {
     storage.registerIngredient(ingredient1);
     storage.registerIngredient(ingredient3);
-    List<ingredient> sortedList = storage.sortedList();
+    List<Ingredient> sortedList = storage.sortedList();
 
     assertEquals(2, sortedList.size());
     assertEquals("milk", sortedList.get(0).getName());
@@ -164,7 +164,7 @@ public class FoodStorageTest {
   @Test
   void getIngredientWithInvalidInput() {
     storage.registerIngredient(ingredient1);
-    List<ingredient> result = storage.getIngredient("milk");
+    List<Ingredient> result = storage.getIngredient("milk");
     assertEquals(1, result.size());
     assertEquals(ingredient1, result.getFirst());
 
@@ -215,7 +215,7 @@ public class FoodStorageTest {
     storage.registerIngredient(ingredient1);
     storage.registerIngredient(ingredient3);
 
-    List<ingredient> expiringSoon = storage.expireBefore(LocalDate.of(2024, 12, 12));
+    List<Ingredient> expiringSoon = storage.expireBefore(LocalDate.of(2024, 12, 12));
     assertEquals(1, expiringSoon.size());
     assertEquals(ingredient3, expiringSoon.getFirst());
 
@@ -231,14 +231,14 @@ public class FoodStorageTest {
    */
   @Test
   void testCheckRecipe() {
-    ingredient Ing = new ingredient("tomato", 200.0, "kg",
+    Ingredient Ing = new Ingredient("tomato", 200.0, "kg",
         LocalDate.of(2024, 12, 15), 20.0);
 
-    recipeIngredient recipeIng2 = new recipeIngredient("tomato", 200.0, "g");
-    recipeIngredient recipeIng3 = new recipeIngredient("carrot", 100.0, "g");
+    RecipeIngredient recipeIng2 = new RecipeIngredient("tomato", 200.0, "g");
+    RecipeIngredient recipeIng3 = new RecipeIngredient("carrot", 100.0, "g");
 
-    List<recipeIngredient> ingredients = List.of(recipeIng2, recipeIng3);
-    recipe recipe = new recipe("Salad", "A simple salad", "Mix all ingredients",
+    List<RecipeIngredient> ingredients = List.of(recipeIng2, recipeIng3);
+    Recipe recipe = new Recipe("Salad", "A simple salad", "Mix all ingredients",
         ingredients, 2);
 
     storage.registerIngredient(Ing);
