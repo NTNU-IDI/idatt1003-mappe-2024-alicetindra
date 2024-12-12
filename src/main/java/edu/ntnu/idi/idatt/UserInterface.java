@@ -117,7 +117,7 @@ public class UserInterface {
         2. Search for an ingredient in food storage.
         3. Remove an amount of an ingredient from food storage.
         4. Print out overview of ingredients in food storage.
-        5. Print out ingredients that expire before a certain date + total price of expiring products.
+        5. Print out ingredients that expire, + total price of expiring products.
         6. Calculate total price of groceries.
         7. Register a recipe.
         8. Search food storage to check if you have enough ingredients for a recipe.
@@ -160,7 +160,7 @@ public class UserInterface {
     System.out.println("Enter grocery amount: ");
     double amount = numbers.nextDouble();
 
-    System.out.println("Enter unit of measurement: ");
+    System.out.println("Enter unit of measurement (litres/ grams/ pieces): ");
     String measureUnit = lines.nextLine();
 
     System.out.println("Enter expiration date in format yyyy-mm-dd: ");
@@ -245,8 +245,8 @@ public class UserInterface {
             "These products will expire before " + date + ":\n" + foodStorage.expireBefore(date)
                 + "\nTotal price: "
                 + foodStorage.totalPriceExpiration(date)
-                + " kr.\nBut remember that a lot of products "
-                + "are still good after it's expiration date. Smell and try the product before throwing it out.");
+                + " kr.\nRemember that a lot of products are still good after it's expiration date."
+                + "\n Smell and try the product before throwing it out.");
       }
     } catch (IllegalArgumentException e) {
       System.out.println("Error: " + e.getMessage());
@@ -288,7 +288,7 @@ public class UserInterface {
         String ingredientName = lines.nextLine();
         System.out.println("Enter ingredient amount:");
         double ingredientAmount = numbers.nextDouble();
-        System.out.println("Enter ingredient unit of measurement:");
+        System.out.println("Enter ingredient unit of measurement (litres/ grams/ pieces):");
         String ingredientUnit = lines.nextLine();
         RecipeIngredient ingredient = new RecipeIngredient(ingredientName, ingredientAmount,
             ingredientUnit);

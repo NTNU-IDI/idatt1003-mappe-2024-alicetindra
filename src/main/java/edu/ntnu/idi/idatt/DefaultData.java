@@ -151,11 +151,11 @@ public class DefaultData {
     return new Recipe("Red curry chicken", "A classic thai curry served with rice",
         """
             1. Cut the chicken in small pieces.
-            2. Peal and finely chop onion and garlic, and shred the bell pepper.
-            3. Fry the chicken in cooking oil in a frying pan
-            4. Fry the garlic with the red curry paste. Add onion, bell pepper, coconut milk and water
+            2. Finely chop onion and garlic, and shred the bell pepper.
+            3. Fry the chicken in cooking oil.
+            4. Fry the garlic with the red curry paste,onion, bell pepper, coconut milk and water.
             5. Add the chicken and let it simmer, 5-10 minutes.
-            6. Cook the rice according to the package and serve""", redCurryChicken, 4);
+            6. Cook the rice and serve.""", redCurryChicken, 4);
   }
 
   /**
@@ -202,13 +202,13 @@ public class DefaultData {
         new RecipeIngredient("pepper", 10, "grams"),
         new RecipeIngredient("rice", 340, "grams"));
     return new Recipe("Lebanese Spinach stew",
-        "Sabenegh wo roz, which means spinach and rice, is an easy-to-make, fresh Lebanese spinach stew.",
+        "Sabenegh wo roz, spinach and rice, is an easy-to-make, fresh Lebanese spinach stew.",
         """
             1. Chop the spinach, onion and mince the garlic.
             2. Heat oil in a big pot and fry the onion until soft.
             3. Add the meat until colored, add garlic and the spinach and stir while frying.
             4. Crumble the bullion cubes and add salt and pepper to taste.
-            5. If you have used frozen spinach bring to a boil, if you have used fresh spinach add a little water adn bring to a boil.
+            5. Bring to a boil.
             6. Lower heat and let simmer for 20-30 minutes.
             7. Cook rice according to package instructions.
             8. As a final touch press lemon juice to taste and enjoy.""", spinachStew, 4);
